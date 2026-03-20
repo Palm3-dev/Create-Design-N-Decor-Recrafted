@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "W": {
+      "tag": "minecraft:wool"
+    },
+    "n": {
+      "tag": "forge:nuggets/brass"
+    }
+  },
+  "pattern": [
+    "Wn ",
+    "nW "
+  ],
+  "result": {
+    "count": 8,
+    "item": "dndecor:blue_velvet_block"
+  },
+  "show_notification": true
+}

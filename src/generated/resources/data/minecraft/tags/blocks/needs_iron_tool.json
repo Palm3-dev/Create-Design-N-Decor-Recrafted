@@ -1,0 +1,22 @@
+{
+  "values": [
+    "dndecor:deepslate_tiles",
+    "dndecor:red_deepslate_tiles",
+    "dndecor:industrial_plating_block",
+    "dndecor:large_metal_girder",
+    "dndecor:beam",
+    "dndecor:diagonal_girder",
+    "dndecor:ornate_grate",
+    "dndecor:zinc_bricks",
+    "dndecor:zinc_checker_tiles",
+    "dndecor:stone_metal",
+    "dndecor:dark_metal_block",
+    "dndecor:dark_metal_plating",
+    "dndecor:dark_metal_block_slab",
+    "dndecor:dark_metal_block_stairs",
+    "dndecor:dark_metal_bricks",
+    "dndecor:dark_metal_brick_slab",
+    "dndecor:dark_metal_brick_stairs",
+    "dndecor:brass_frontlight"
+  ]
+}
