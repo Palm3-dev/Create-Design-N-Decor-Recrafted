@@ -4,10 +4,6 @@ import com.mojang.logging.LogUtils;
 import com.palm3.designdecor.register.DDBlocks;
 import com.palm3.designdecor.register.DDTabs;
 import com.simibubi.create.foundation.data.CreateRegistrate;
-import com.tterrag.registrate.providers.ProviderType;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -17,8 +13,6 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -31,7 +25,6 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
 
 @Mod(DDMain.MOD_ID)
 public class DDMain {
@@ -45,7 +38,7 @@ public class DDMain {
         var modEventBus = context.getModEventBus();
         DD_REGISTRATE.registerEventListeners(modEventBus);
         modEventBus.addListener(this::addPackFinders);
-        modEventBus.addListener(this::onGatherData);
+        //modEventBus.addListener(this::onGatherData);
         // Registrations
         DDBlocks.register();
         DDTabs.DD_TABS.register(modEventBus);
@@ -53,6 +46,10 @@ public class DDMain {
 
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
+    public static ResourceLocation asExternalResource(String namespace, String path) {
+        return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 
     // Design 'N' Decor Assets loading
@@ -103,10 +100,13 @@ public class DDMain {
         }
     }
 
-    private void onGatherData(GatherDataEvent event) {
+    /*private void onGatherData(GatherDataEvent event) {
+        //DDBlocks.register();
         DataGenerator gen = event.getGenerator();
         PackOutput output = gen.getPackOutput();
         ExistingFileHelper efh = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-    }
+
+        //event.getGenerator().addProvider(true, new ModBlockTagsProvider(output, lookupProvider, efh));
+    }*/
 }

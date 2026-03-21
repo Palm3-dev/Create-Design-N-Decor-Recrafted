@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -14,7 +15,7 @@ public class DDTabs {
     public static final RegistryObject<CreativeModeTab> MAIN_TAB = DD_TABS
             .register("main_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.dndecor.base"))
-                    .icon(() -> new ItemStack(DDBlocks.BRASS_FRONTLIGHT))
+                    .icon(() -> new ItemStack(Items.ACACIA_BUTTON))
                     .displayItems((params, output) -> {
                         DDMain.DD_REGISTRATE.getAll(Registries.BLOCK)
                                 .forEach(entry -> output.accept(entry.get().asItem()));

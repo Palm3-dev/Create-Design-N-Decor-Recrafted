@@ -5,8 +5,6 @@
     "dndecor:beam",
     "dndecor:diagonal_girder",
     "dndecor:ornate_grate",
-    "dndecor:dark_metal_block",
-    "dndecor:dark_metal_plating",
-    "dndecor:brass_frontlight"
+    "dndecor:dark_metal_plating"
   ]
 }

@@ -24,82 +24,72 @@ import static com.palm3.designdecor.helpers.CTSpriteShiftsHelpers.*;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 
 public class BlockBuildingHelpers {
-    // Simple
-    /*private static BlockBuilder<Block, CreateRegistrate> simpleBlock(String name, MapColor mapColor, SoundType sound) {
+    //============================= Block Builders ===============================
+
+    // ------- Simple Blocks Builders -------
+
+    // These methods add don't have the tag, recipe and item.
+    /// Creates a simple block with given name and properties (plus dropSelf and needs iron pickaxe). Needs register().
+    /// Doesn't have crafting, tags or item.
+    public static BlockBuilder<Block, CreateRegistrate> simpleBlock(String name, MapColor mapColor, SoundType sound) {
         return DD_REGISTRATE
                 .block(name, Block::new)
-                .initialProperties(SharedProperties::stone)
+                .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .simpleItem();
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE);
     }
 
-    private static BlockBuilder<SlabBlock, CreateRegistrate> simpleSlabBlock(String baseName, MapColor mapColor, SoundType sound) {
+    /// Creates a simple slab with given name and properties (plus dropSelf and needs iron pickaxe). Needs register().
+    /// Doesn't have crafting, tags or item.
+    public static BlockBuilder<SlabBlock, CreateRegistrate> simpleSlabBlock(String nameWithout_slab, MapColor mapColor, SoundType sound) {
         return DD_REGISTRATE
-                .block(baseName + "_slab", SlabBlock::new)
-                .initialProperties(SharedProperties::stone)
+                .block(nameWithout_slab + "_slab", SlabBlock::new)
+                .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .simpleItem();
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE);
     }
 
-    private static BlockBuilder<StairBlock, CreateRegistrate> simpleStairBlock(String baseName, Block parentBlock, MapColor mapColor, SoundType sound) {
+    /// Creates a simple stair with given name and properties (plus dropSelf and needs iron pickaxe). Needs register().
+    /// Doesn't have crafting, tags or item.
+    public static BlockBuilder<StairBlock, CreateRegistrate> simpleStairBlock(String nameWithout_stairs, Supplier<Block> parentBlock, MapColor mapColor, SoundType sound) {
         return DD_REGISTRATE
-                .block(baseName + "_stairs", p -> new StairBlock(parentBlock.defaultBlockState(), p))
-                .initialProperties(SharedProperties::stone)
+                .block(nameWithout_stairs + "_stairs", p -> new StairBlock(parentBlock.get().defaultBlockState(), p))
+                .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .simpleItem();
-    }*/
-
-    //  ------- Stone Like Blocks Registers -------
-    /*private static BlockEntry<Block> registerSimpleStoneBlock(String name, MapColor mapColor, SoundType sound, String stoneItemTag) {
-        return DD_REGISTRATE
-                .block(name, Block::new)
-                .initialProperties(SharedProperties::stone)
-                .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
-                .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .recipe((c, p) -> {
-                    p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
-                })
-                .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build()
-                .register();
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE);
     }
 
-    private static BlockEntry<SlabBlock> registerSimpleStoneSlabBlock(String name, MapColor mapColor, SoundType sound, String stoneItemTag) {
+    /// Creates a simple wall with given name and properties (plus dropSelf and needs iron pickaxe). Needs register().
+    /// Doesn't have crafting, tags or item.
+    public static BlockBuilder<WallBlock, CreateRegistrate> simpleWallBlock(String nameWithout_wall, MapColor mapColor, SoundType sound) {
         return DD_REGISTRATE
-                .block(name, SlabBlock::new)
-                .initialProperties(SharedProperties::stone)
+                .block(nameWithout_wall + "_wall", WallBlock::new)
+                .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .recipe((c, p) -> {
-                    p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
-                })
-                .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build()
-                .register();
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.WALLS);
     }
 
-    private static BlockEntry<StairBlock> registerSimpleStoneStairBlock(String name, Block parentBlock, MapColor mapColor, SoundType sound, String stoneItemTag) {
+    /// Creates a simple pillar with given name and properties (plus dropSelf and needs iron pickaxe). Needs register().
+    /// Doesn't have crafting, tags or item.
+    public static BlockBuilder<ConnectedPillarBlock, CreateRegistrate> simplePillarBlock(String nameWithout_pillar, MapColor mapColor, SoundType sound, String generalPathInBlockDir, String textureAcceptsPath, String topTextureAcceptsPath) {
         return DD_REGISTRATE
-                .block(name, p -> new StairBlock(parentBlock.defaultBlockState(), p))
-                .initialProperties(SharedProperties::stone)
+                .block(nameWithout_pillar + "_pillar", ConnectedPillarBlock::new)
+                .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(rectangleLocationConnected(generalPathInBlockDir, textureAcceptsPath), omniLocationConnected(generalPathInBlockDir, topTextureAcceptsPath))))
+                .initialProperties(SharedProperties::softMetal)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                .recipe((c, p) -> {
-                    p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
-                })
-                .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build()
-                .register();
-    }*/
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE);
+    }
+
 
     // ------- Stone Like Blocks Builders -------
+
     // These methods add the item tag with the name of the block to dndecor:stone_types/x
+    /// Creates a simple stone-type block with given name and properties (stonecutting tag stone_types/name). Needs register()
     public static BlockBuilder<Block, CreateRegistrate> simpleStoneBlock(String name, MapColor mapColor, SoundType sound, String stoneItemTag) {
         return DD_REGISTRATE
                 .block(name, Block::new)
@@ -113,6 +103,7 @@ public class BlockBuildingHelpers {
                 .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build();
     }
 
+    /// Creates a simple stone-type slab with given name and properties (stonecutting tag stone_types/name). Needs register()
     public static BlockBuilder<SlabBlock, CreateRegistrate> simpleStoneSlabBlock(String nameWithout_slab, MapColor mapColor, SoundType sound, String stoneItemTag) {
         return DD_REGISTRATE
                 .block(nameWithout_slab + "_slab", SlabBlock::new)
@@ -121,11 +112,12 @@ public class BlockBuildingHelpers {
                 .loot((t, g) -> t.dropSelf(g))
                 .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
                 .recipe((c, p) -> {
-                    p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
+                    p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 2);
                 })
                 .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build();
     }
 
+    /// Creates a simple stone-type stair with given name and properties (stonecutting tag stone_types/name). Needs register()
     public static BlockBuilder<StairBlock, CreateRegistrate> simpleStoneStairBlock(String nameWithout_stair, Supplier<Block> parentBlock, MapColor mapColor, SoundType sound, String stoneItemTag) {
         return DD_REGISTRATE
                 .block(nameWithout_stair + "_stairs", p -> new StairBlock(parentBlock.get().defaultBlockState(), p))
@@ -139,23 +131,25 @@ public class BlockBuildingHelpers {
                 .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build();
     }
 
-    public static BlockBuilder<WallBlock, CreateRegistrate> simpleStoneWallBlock(String nameWithout_stair, MapColor mapColor, SoundType sound, String stoneItemTag) {
+    /// Creates a simple stone-type wall with given name and properties (stonecutting tag stone_types/name). Needs register()
+    public static BlockBuilder<WallBlock, CreateRegistrate> simpleStoneWallBlock(String nameWithout_wall, MapColor mapColor, SoundType sound, String stoneItemTag) {
         return DD_REGISTRATE
-                .block(nameWithout_stair + "_wall", WallBlock::new)
+                .block(nameWithout_wall + "_wall", WallBlock::new)
                 .initialProperties(SharedProperties::stone)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
-                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
+                .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.WALLS)
                 .recipe((c, p) -> {
                     p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                 })
                 .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build();
     }
 
+    /// Creates a simple stone-type connected pillar with given name and properties (stonecutting tag stone_types/name). Needs register()
     public static BlockBuilder<ConnectedPillarBlock, CreateRegistrate> simpleStonePillarBlock(String nameWithout_pillar, MapColor mapColor, SoundType sound, String generalPathInBlockDir, String textureAcceptsPath, String topTextureAcceptsPath, String stoneItemTag) {
         return DD_REGISTRATE
                 .block(nameWithout_pillar + "_pillar", ConnectedPillarBlock::new)
-                .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(omniLocationConnected(generalPathInBlockDir, textureAcceptsPath), omniLocationConnected(generalPathInBlockDir, topTextureAcceptsPath))))
+                .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(rectangleLocationConnected(generalPathInBlockDir, textureAcceptsPath), omniLocationConnected(generalPathInBlockDir, topTextureAcceptsPath))))
                 .initialProperties(SharedProperties::stone)
                 .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                 .loot((t, g) -> t.dropSelf(g))
@@ -166,59 +160,67 @@ public class BlockBuildingHelpers {
                 .item().tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))).build();
     }
 
+    //============================= Registrations ===============================
+    public static final Map<String, BlockEntry<Block>> BLOCKS_MAP = new HashMap<>();
+    public static final Map<String, BlockEntry<SlabBlock>> SLABS_MAP = new HashMap<>();
+    public static final Map<String, BlockEntry<StairBlock>> STAIRS_MAP = new HashMap<>();
+    public static final Map<String, BlockEntry<WallBlock>> WALLS_MAP = new HashMap<>();
+    public static final Map<String, BlockEntry<ConnectedPillarBlock>> PILLARS_MAP = new HashMap<>();
 
-    // ---------- Stone Like Blocks Registration Methods ----------
-    public static final Map<String, BlockEntry<Block>> STONE_BLOCKS_SET = new HashMap<>();
-    public static final Map<String, BlockEntry<SlabBlock>> STONE_SLABS_SET = new HashMap<>();
-    public static final Map<String, BlockEntry<StairBlock>> STONE_STAIRS_SET = new HashMap<>();
-    public static final Map<String, BlockEntry<WallBlock>> STONE_WALLS_SET = new HashMap<>();
-    public static final Map<String, BlockEntry<ConnectedPillarBlock>> STONE_PILLARS_SET = new HashMap<>();
 
-    public static void registerSimpleStoneBlockSet(String material, MapColor generalMapColor, SoundType generalSoundType, String stoneItemTag, String pillarTextureGeneralPath, String pillarTextureAcceptsPath, String pillarTopTextureAcceptsPath){
-        STONE_BLOCKS_SET.put("cut_" + material, simpleStoneBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_BLOCKS_SET.put("polished_cut_" + material, simpleStoneBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_BLOCKS_SET.put("cut_" + material + "_bricks", simpleStoneBlock("cut_" + material + "_bricks", generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_BLOCKS_SET.put("small_" + material + "_bricks", simpleStoneBlock("small_" + material + "_bricks", generalMapColor, generalSoundType, stoneItemTag).register());
+    // ---------- Stone Like Block Set Registration Methods ----------
 
-        STONE_SLABS_SET.put("cut_" + material + "_slab", simpleStoneSlabBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_SLABS_SET.put("polished_cut_" + material + "_slab", simpleStoneSlabBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_SLABS_SET.put("cut_" + material + "_brick_slab", simpleStoneSlabBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_SLABS_SET.put("small_" + material + "_brick_slab", simpleStoneSlabBlock("small_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
+    /// Registers a full stone block set (blocks, slabs, stairs, walls, pillar) in cut, brick and polished version.
+    /// Accepts custom paths for the pillar texture, and the texture also accepts paths.
+    /// Does NOT need register()
+    public static void registerStoneBlockSet(String material, MapColor generalMapColor, SoundType generalSoundType, String stoneItemTag, String pillarTextureGeneralPath, String pillarTextureAcceptsPath, String pillarTopTextureAcceptsPath){
+        BLOCKS_MAP.put("cut_" + material, simpleStoneBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        BLOCKS_MAP.put("polished_cut_" + material, simpleStoneBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        BLOCKS_MAP.put("cut_" + material + "_bricks", simpleStoneBlock("cut_" + material + "_bricks", generalMapColor, generalSoundType, stoneItemTag).register());
+        BLOCKS_MAP.put("small_" + material + "_bricks", simpleStoneBlock("small_" + material + "_bricks", generalMapColor, generalSoundType, stoneItemTag).register());
 
-        STONE_STAIRS_SET.put("cut_" + material + "_stairs", simpleStoneStairBlock("cut_" + material, () -> STONE_BLOCKS_SET.get("cut_" + material).get(), generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_STAIRS_SET.put("polished_cut_" + material + "_stairs", simpleStoneStairBlock("polished_cut_" + material, () -> STONE_BLOCKS_SET.get("polished_cut_" + material).get(), generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_STAIRS_SET.put("cut_" + material + "_brick_stairs", simpleStoneStairBlock("cut_" + material + "_brick", () -> STONE_BLOCKS_SET.get("cut_" + material + "_bricks").get(), generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_STAIRS_SET.put("small_" + material + "_brick_stairs", simpleStoneStairBlock("small_" + material + "_brick", () -> STONE_BLOCKS_SET.get("small_" + material + "_bricks").get(), generalMapColor, generalSoundType, stoneItemTag).register());
+        SLABS_MAP.put("cut_" + material + "_slab", simpleStoneSlabBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        SLABS_MAP.put("polished_cut_" + material + "_slab", simpleStoneSlabBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        SLABS_MAP.put("cut_" + material + "_brick_slab", simpleStoneSlabBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
+        SLABS_MAP.put("small_" + material + "_brick_slab", simpleStoneSlabBlock("small_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
 
-        STONE_WALLS_SET.put("cut_" + material + "_wall", simpleStoneWallBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_WALLS_SET.put("polished_cut_" + material + "_wall", simpleStoneWallBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_WALLS_SET.put("cut_" + material + "_brick_wall", simpleStoneWallBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
-        STONE_WALLS_SET.put("small_" + material + "_brick_wall", simpleStoneWallBlock("small_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
+        STAIRS_MAP.put("cut_" + material + "_stairs", simpleStoneStairBlock("cut_" + material, () -> BLOCKS_MAP.get("cut_" + material).get(), generalMapColor, generalSoundType, stoneItemTag).register());
+        STAIRS_MAP.put("polished_cut_" + material + "_stairs", simpleStoneStairBlock("polished_cut_" + material, () -> BLOCKS_MAP.get("polished_cut_" + material).get(), generalMapColor, generalSoundType, stoneItemTag).register());
+        STAIRS_MAP.put("cut_" + material + "_brick_stairs", simpleStoneStairBlock("cut_" + material + "_brick", () -> BLOCKS_MAP.get("cut_" + material + "_bricks").get(), generalMapColor, generalSoundType, stoneItemTag).register());
+        STAIRS_MAP.put("small_" + material + "_brick_stairs", simpleStoneStairBlock("small_" + material + "_brick", () -> BLOCKS_MAP.get("small_" + material + "_bricks").get(), generalMapColor, generalSoundType, stoneItemTag).register());
 
-        STONE_PILLARS_SET.put(material + "_pillar", simpleStonePillarBlock(material, generalMapColor, generalSoundType, pillarTextureGeneralPath, pillarTextureAcceptsPath, pillarTopTextureAcceptsPath, stoneItemTag).register());
+        WALLS_MAP.put("cut_" + material + "_wall", simpleStoneWallBlock("cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        WALLS_MAP.put("polished_cut_" + material + "_wall", simpleStoneWallBlock("polished_cut_" + material, generalMapColor, generalSoundType, stoneItemTag).register());
+        WALLS_MAP.put("cut_" + material + "_brick_wall", simpleStoneWallBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
+        WALLS_MAP.put("small_" + material + "_brick_wall", simpleStoneWallBlock("small_" + material + "_brick", generalMapColor, generalSoundType, stoneItemTag).register());
+
+        PILLARS_MAP.put(material + "_pillar", simpleStonePillarBlock(material, generalMapColor, generalSoundType, pillarTextureGeneralPath, pillarTextureAcceptsPath, pillarTopTextureAcceptsPath, stoneItemTag).register());
     }
 
-    public static void registerSimpleStoneBlockSet(String material, MapColor generalMapColor, SoundType generalSoundType){
-        STONE_BLOCKS_SET.put("cut_" + material, simpleStoneBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_BLOCKS_SET.put("polished_cut_" + material, simpleStoneBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_BLOCKS_SET.put("cut_" + material + "_bricks", simpleStoneBlock("cut_" + material + "_bricks", generalMapColor, generalSoundType, material).register());
-        STONE_BLOCKS_SET.put("small_" + material + "_bricks", simpleStoneBlock("small_" + material + "_bricks", generalMapColor, generalSoundType, material).register());
+    /// Registers a full stone block set (blocks, slabs, stairs, walls, pillar) in cut, brick and polished version.
+    /// Takes the pillar assets from /block/palettes/stone_types -> /pillar (side) & /cap (top).
+    /// Does NOT need register()
+    public static void registerStoneBlockSet(String material, MapColor generalMapColor, SoundType generalSoundType){
+        BLOCKS_MAP.put("cut_" + material, simpleStoneBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
+        BLOCKS_MAP.put("polished_cut_" + material, simpleStoneBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
+        BLOCKS_MAP.put("cut_" + material + "_bricks", simpleStoneBlock("cut_" + material + "_bricks", generalMapColor, generalSoundType, material).register());
+        BLOCKS_MAP.put("small_" + material + "_bricks", simpleStoneBlock("small_" + material + "_bricks", generalMapColor, generalSoundType, material).register());
 
-        STONE_SLABS_SET.put("cut_" + material + "_slab", simpleStoneSlabBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_SLABS_SET.put("polished_cut_" + material + "_slab", simpleStoneSlabBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_SLABS_SET.put("cut_" + material + "_brick_slab", simpleStoneSlabBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, material).register());
-        STONE_SLABS_SET.put("small_" + material + "_brick_slab", simpleStoneSlabBlock("small_" + material + "_brick", generalMapColor, generalSoundType, material).register());
+        SLABS_MAP.put("cut_" + material + "_slab", simpleStoneSlabBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
+        SLABS_MAP.put("polished_cut_" + material + "_slab", simpleStoneSlabBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
+        SLABS_MAP.put("cut_" + material + "_brick_slab", simpleStoneSlabBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, material).register());
+        SLABS_MAP.put("small_" + material + "_brick_slab", simpleStoneSlabBlock("small_" + material + "_brick", generalMapColor, generalSoundType, material).register());
 
-        STONE_STAIRS_SET.put("cut_" + material + "_stairs", simpleStoneStairBlock("cut_" + material, () -> STONE_BLOCKS_SET.get("cut_" + material).get(), generalMapColor, generalSoundType, material).register());
-        STONE_STAIRS_SET.put("polished_cut_" + material + "_stairs", simpleStoneStairBlock("polished_cut_" + material, () -> STONE_BLOCKS_SET.get("polished_cut_" + material).get(), generalMapColor, generalSoundType, material).register());
-        STONE_STAIRS_SET.put("cut_" + material + "_brick_stairs", simpleStoneStairBlock("cut_" + material + "_brick", () -> STONE_BLOCKS_SET.get("cut_" + material + "_bricks").get(), generalMapColor, generalSoundType, material).register());
-        STONE_STAIRS_SET.put("small_" + material + "_brick_stairs", simpleStoneStairBlock("small_" + material + "_brick", () -> STONE_BLOCKS_SET.get("small_" + material + "_bricks").get(), generalMapColor, generalSoundType, material).register());
+        STAIRS_MAP.put("cut_" + material + "_stairs", simpleStoneStairBlock("cut_" + material, () -> BLOCKS_MAP.get("cut_" + material).get(), generalMapColor, generalSoundType, material).register());
+        STAIRS_MAP.put("polished_cut_" + material + "_stairs", simpleStoneStairBlock("polished_cut_" + material, () -> BLOCKS_MAP.get("polished_cut_" + material).get(), generalMapColor, generalSoundType, material).register());
+        STAIRS_MAP.put("cut_" + material + "_brick_stairs", simpleStoneStairBlock("cut_" + material + "_brick", () -> BLOCKS_MAP.get("cut_" + material + "_bricks").get(), generalMapColor, generalSoundType, material).register());
+        STAIRS_MAP.put("small_" + material + "_brick_stairs", simpleStoneStairBlock("small_" + material + "_brick", () -> BLOCKS_MAP.get("small_" + material + "_bricks").get(), generalMapColor, generalSoundType, material).register());
 
-        STONE_WALLS_SET.put("cut_" + material + "_wall", simpleStoneWallBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_WALLS_SET.put("polished_cut_" + material + "_wall", simpleStoneWallBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
-        STONE_WALLS_SET.put("cut_" + material + "_brick_wall", simpleStoneWallBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, material).register());
-        STONE_WALLS_SET.put("small_" + material + "_brick_wall", simpleStoneWallBlock("small_" + material + "_brick", generalMapColor, generalSoundType, material).register());
+        WALLS_MAP.put("cut_" + material + "_wall", simpleStoneWallBlock("cut_" + material, generalMapColor, generalSoundType, material).register());
+        WALLS_MAP.put("polished_cut_" + material + "_wall", simpleStoneWallBlock("polished_cut_" + material, generalMapColor, generalSoundType, material).register());
+        WALLS_MAP.put("cut_" + material + "_brick_wall", simpleStoneWallBlock("cut_" + material + "_brick", generalMapColor, generalSoundType, material).register());
+        WALLS_MAP.put("small_" + material + "_brick_wall", simpleStoneWallBlock("small_" + material + "_brick", generalMapColor, generalSoundType, material).register());
 
-        STONE_PILLARS_SET.put(material + "_pillar", simpleStonePillarBlock(material, generalMapColor, generalSoundType, "palettes/stone_types", "palettes/stone_types/pillar/" + material, "palettes/stone_types/cap/" + material, material).register());
+        PILLARS_MAP.put(material + "_pillar", simpleStonePillarBlock(material, generalMapColor, generalSoundType, "palettes/stone_types", "pillar/" + material + "_cut_pillar", "cap/" + material + "_cut_cap", material).register());
     }
 }
