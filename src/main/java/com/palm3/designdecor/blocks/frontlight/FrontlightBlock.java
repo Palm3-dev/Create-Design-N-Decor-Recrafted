@@ -1,4 +1,4 @@
-// This class has been rewritten
+// This class has been partially rewritten
 
 package com.palm3.designdecor.blocks.frontlight;
 
