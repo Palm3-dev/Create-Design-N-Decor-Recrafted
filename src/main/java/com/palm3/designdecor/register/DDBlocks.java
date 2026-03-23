@@ -1,9 +1,10 @@
 package com.palm3.designdecor.register;
 
-import com.palm3.designdecor.DDWindowGen;
+import com.palm3.designdecor.helpers.DDWindowGen;
 import com.palm3.designdecor.blocks.DiagonalGirderBlock;
 import com.palm3.designdecor.blocks.beam.BeamBlock;
 import com.palm3.designdecor.blocks.beam.BeamCTBehaviour;
+import com.palm3.designdecor.blocks.frontlight.FrontlightBlock;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllTags;
@@ -31,8 +32,8 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
 
 import static com.palm3.designdecor.DDMain.*;
-import static com.palm3.designdecor.helpers.BlockBuildingHelpers.*;
-import static com.palm3.designdecor.helpers.CTSpriteShiftsHelpers.*;
+import static com.palm3.designdecor.helpers.DDBlockBuildingHelpers.*;
+import static com.palm3.designdecor.helpers.DDCTSpriteShiftsHelpers.*;
 import static com.simibubi.create.foundation.data.CreateRegistrate.casingConnectivity;
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -48,13 +49,14 @@ public class DDBlocks {
             .transform(BuilderTransformers.casing(() -> omniConnected("deepslate_tiles")))
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, p) -> t.dropSelf(p))
             .recipe((c, p) -> p.stonecutting(
                     DataIngredient.tag(Tags.Items.COBBLESTONE_DEEPSLATE),
                     RecipeCategory.BUILDING_BLOCKS,
                     c::get))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Red Deepslate Tiles - OK
@@ -63,13 +65,14 @@ public class DDBlocks {
             .transform(BuilderTransformers.casing(() -> omniConnected("red_deepslate_tiles")))
             .initialProperties(SharedProperties::stone)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.DEEPSLATE).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, p) -> t.dropSelf(p))
             .recipe((c, p) -> p.stonecutting(
                     DataIngredient.tag(Tags.Items.COBBLESTONE_DEEPSLATE),
                     RecipeCategory.BUILDING_BLOCKS,
                     c::get))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Ornate Iron Glass - OK
@@ -83,17 +86,19 @@ public class DDBlocks {
                     .isRedstoneConductor((state, getter, pos) -> false)
                     .isSuffocating((state, getter, pos) -> false)
                     .isViewBlocking((state, getter, pos) -> false))
+            .transform(noBlockState())
             .loot((t, g) -> t.dropWhenSilkTouch(g))
             .recipe((c, p) -> p.stonecutting(DataIngredient.tag(Tags.Items.GLASS),
                     RecipeCategory.BUILDING_BLOCKS, c::get))
             .tag(Tags.Blocks.GLASS, BlockTags.IMPERMEABLE)
-            .item()
+            .transform(itemWithoutModel(Tags.Items.GLASS))
+            /*.item()
             .tag(Tags.Items.GLASS)
-            .build()
+            .build()*/
             .register();
 
     // Ornate Iron Glass Pane - OK
-    public static final BlockEntry<ConnectedGlassPaneBlock> ORNATE_IRON_GLASS_PANE = DDWindowGen.customWindowPane(
+    public static final BlockEntry<ConnectedGlassPaneBlock> ORNATE_IRON_GLASS_PANE = DDWindowGen.customWindowPaneWithoutBlockStateAndItemModel(
                 "ornate_iron_glass",
                 ORNATE_IRON_GLASS,
                 () -> omniLocationConnected("palettes", "ornate_iron_glass"),
@@ -106,13 +111,14 @@ public class DDBlocks {
             .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConnected("industrial_plating_block_side"), omniConnected("industrial_plating_block"))))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                     p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 1);
                 p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_IRON), RecipeCategory.BUILDING_BLOCKS, c, 2);
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Large Metal Girder - OK
@@ -121,6 +127,7 @@ public class DDBlocks {
             .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(rectangleConnected("large_girder"), omniConnected("large_girder_top"))))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
                     .pattern("## ")
@@ -129,7 +136,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllBlocks.METAL_GIRDER.asItem()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Beam Block - OK
@@ -137,6 +144,7 @@ public class DDBlocks {
             .block("beam", BeamBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.noOcclusion().sound(SoundType.NETHERITE_BLOCK).mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .onRegister(connectedTextures(() -> new BeamCTBehaviour(
                     horizKryppersLocationConnected("beam", "beam"),
                     verticalLocationConnected("beam", "beam_top_z"),
@@ -148,7 +156,7 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get(), INDUSTRIAL_PLATING_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 1);
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Diagonal Girder Block - OK
@@ -156,6 +164,7 @@ public class DDBlocks {
             .block("diagonal_girder", DiagonalGirderBlock::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.noOcclusion().sound(SoundType.NETHERITE_BLOCK).mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 2)
                     .pattern(" # ")
@@ -164,7 +173,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllBlocks.METAL_GIRDER.asItem()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Ornate Grate - OK
@@ -173,6 +182,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutout)
             .transform(BuilderTransformers.casing(() -> omniConnected("ornate_grate")))
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY).requiresCorrectToolForDrops().noOcclusion())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 8)
                     .pattern("#I#")
@@ -183,7 +193,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllPaletteBlocks.ORNATE_IRON_WINDOW.asItem()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Zinc Bricks - OK
@@ -191,6 +201,7 @@ public class DDBlocks {
             .block("zinc_bricks", Block::new)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.METAL).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 8)
                     .pattern("## ")
@@ -199,7 +210,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllBlocks.ZINC_BLOCK.asItem()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Zinc Checker Tiles - OK
@@ -208,6 +219,7 @@ public class DDBlocks {
             .transform(BuilderTransformers.casing(() -> omniConnected("zinc_checker_tiles")))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY).sound(SoundType.METAL).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 8)
                     .pattern("###")
@@ -218,7 +230,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllBlocks.ZINC_BLOCK.asItem()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Stone Metal - OK
@@ -227,6 +239,7 @@ public class DDBlocks {
             .transform(BuilderTransformers.casing(() -> omniConnected("stone_metal")))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.COLOR_GRAY).sound(DDSoundTypes.METAL_HEAVY).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
                     .pattern("AP")
@@ -236,7 +249,7 @@ public class DDBlocks {
                     .unlockedBy("has_ingredient", has(AllPaletteStoneTypes.ASURINE.baseBlock.get()))
                     .save(p::accept))
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Colored Stone Metals - OK
@@ -248,7 +261,7 @@ public class DDBlocks {
         return DD_REGISTRATE
                 .block(blockID, Block::new)
                 .properties(p -> p.mapColor(color.getMapColor()).sound(DDSoundTypes.METAL_HEAVY).strength(1.5f,2f))
-                //.blockstate((c, p) -> p.simpleBlock(c.get()))
+                .transform(noBlockState())
                 .onRegister(CreateRegistrate.connectedTextures(() -> new EncasedCTBehaviour(ct)))
                 .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, ct)))
                 .transform(pickaxeOnly())
@@ -268,7 +281,7 @@ public class DDBlocks {
                             .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName() + "_dyed"));
                 })
                 .item().tag(ItemTags.create(asResource("stone_metals"))).build()
-                .simpleItem()
+                .transform(itemWithoutModel())
                 .register();
     });
 
@@ -280,6 +293,7 @@ public class DDBlocks {
         return DD_REGISTRATE
                 .block(blockID, Block::new)
                 .properties(p -> p.mapColor(color.getMapColor()).sound(SoundType.WOOL).strength(0.5f,0.5f))
+                .transform(noBlockState())
                 .loot((t, g) -> t.dropSelf(g))
                 .recipe((c, p) -> {
                     ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 8)
@@ -290,7 +304,7 @@ public class DDBlocks {
                             .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
                 })
                 .item().tag(ItemTags.WOOL).build()
-                .simpleItem()
+                .transform(itemWithoutModel())
                 .register();
     });
 
@@ -303,7 +317,9 @@ public class DDBlocks {
                         .define('#', AllBlocks.INDUSTRIAL_IRON_BLOCK.get())
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Plating
@@ -312,6 +328,7 @@ public class DDBlocks {
             .transform(BuilderTransformers.casing(() -> omniConnected("dark_metal_plating")))
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -321,8 +338,10 @@ public class DDBlocks {
                         .define('#', DDBlocks.DARK_METAL_BLOCK.get())
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
+            .transform(noBlockState())
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Block Slab
@@ -335,7 +354,9 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))), RecipeCategory.BUILDING_BLOCKS, c, 2);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 4);
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Block Stairs
@@ -350,7 +371,9 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Bricks
@@ -364,7 +387,9 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Brick Slab
@@ -377,7 +402,9 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))), RecipeCategory.BUILDING_BLOCKS, c, 2);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 4);
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Dark Metal Brick Stairs
@@ -392,15 +419,18 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 2);
             })
-            .item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(noBlockState())
+            //.item().tag(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))).build()
+            .transform(itemWithoutModel(TagKey.create(Registries.ITEM, asResource("dark_metal_decor"))))
             .register();
 
     // Brass Frontlight
-    /*public static final BlockEntry<FrontlightBlock> BRASS_FRONTLIGHT = DD_REGISTRATE
+    public static final BlockEntry<FrontlightBlock> BRASS_FRONTLIGHT = DD_REGISTRATE
             .block("brass_frontlight", FrontlightBlock::new)
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -412,7 +442,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Andesite Frontlight
@@ -421,6 +451,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -432,15 +463,16 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
-/*
+
     // Zinc Frontlight
     public static final BlockEntry<FrontlightBlock> ZINC_FRONTLIGHT = DD_REGISTRATE
             .block("zinc_frontlight", FrontlightBlock::new)
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_CYAN).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -452,7 +484,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Copper Frontlight
@@ -461,6 +493,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_ORANGE).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -472,7 +505,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Industrial Frontlight
@@ -481,6 +514,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -492,7 +526,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Gold Frontlight
@@ -501,6 +535,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -512,7 +547,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Iron Frontlight
@@ -521,6 +556,7 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
@@ -532,7 +568,7 @@ public class DDBlocks {
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
+            .transform(itemWithoutModel())
             .register();
 
     // Netherite Frontlight
@@ -541,77 +577,83 @@ public class DDBlocks {
             .addLayer(() -> RenderType::cutoutMipped)
             .initialProperties(SharedProperties::softMetal)
             .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .transform(noBlockState())
             .loot((t, g) -> t.dropSelf(g))
+            .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .recipe((c, p) -> {
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 4)
                         .pattern("li ")
                         .pattern("is ")
+                        .define('i', DataIngredient.items(Items.NETHERITE_INGOT))
                         .define('l', DataIngredient.items(Items.BLAZE_ROD, Items.GLOWSTONE_DUST, Items.PRISMARINE_CRYSTALS))
                         .define('s', Tags.Items.STONE)
-                        .define('i', DataIngredient.items(Items.NETHERITE_INGOT))
                         .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
 
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, c.get(), 1)
-                        .pattern("li ")
-                        .pattern("is ")
-                        .define('l', DataIngredient.items(Items.BLAZE_ROD, Items.GLOWSTONE_DUST, Items.PRISMARINE_CRYSTALS))
-                        .define('s', Tags.Items.STONE)
-                        .define('i', AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()) // <-- Don't mess with me, i'm not going to make you craft a lamp with 2 damn netherite ingots. you get less but you don't waste ingots.
-                        .unlockedBy("has_" + c.getName(), has(c.get())).save(p, asResource("crafting/" + c.getName()));
+                        .pattern("LI ")
+                        .pattern("IS ")
+                        .define('I', AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()) // <-- Don't mess with me, i'm not going to make you craft a lamp with 2 damn netherite ingots. you get less but you don't waste ingots.
+                        .define('L', DataIngredient.items(Items.BLAZE_ROD, Items.GLOWSTONE_DUST, Items.PRISMARINE_CRYSTALS))
+                        .define('S', Tags.Items.STONE)
+                        .unlockedBy("has_" + AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem(), has(AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem())).save(p, asResource("crafting/" + c.getName() + "_from_industrial_iron_block"));
             })
-            .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-            .simpleItem()
-            .register();*/
+            .transform(itemWithoutModel())
+            .register();
 
     // Brass Floor
     public static final BlockEntry<Block> BRASS_FLOOR = simpleBlock("brass_floor", MapColor.TERRACOTTA_YELLOW, SoundType.METAL)
-            .recipe((c, p) -> {
-                p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "ingots/brass"))), RecipeCategory.BUILDING_BLOCKS, c, 2);
-            })
-            .simpleItem()
+            .recipe((c, p) ->
+                p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("forge", "ingots/brass"))), RecipeCategory.BUILDING_BLOCKS, c, 2))
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Andesite Floor
     public static final BlockEntry<Block> ANDESITE_FLOOR = simpleBlock("andesite_floor", MapColor.COLOR_CYAN, SoundType.METAL)
-            .recipe((c, p) -> {
-                p.stonecutting(DataIngredient.items(AllItems.ANDESITE_ALLOY.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2);
-            })
-            .simpleItem()
+            .recipe((c, p) ->
+                p.stonecutting(DataIngredient.items(AllItems.ANDESITE_ALLOY.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2))
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Zinc Floor
     public static final BlockEntry<Block> ZINC_FLOOR = simpleBlock("zinc_floor", MapColor.COLOR_LIGHT_GRAY, SoundType.METAL)
             .recipe((c, p) ->
                     p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asExternalResource("forge", "ingots/zinc"))), RecipeCategory.BUILDING_BLOCKS, c, 2))
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Copper Floor
     public static final BlockEntry<Block> COPPER_FLOOR = simpleBlock("copper_floor", MapColor.TERRACOTTA_ORANGE, SoundType.METAL)
             .recipe((c, p) ->
                     p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_COPPER), RecipeCategory.BUILDING_BLOCKS, c, 2))
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Industrial Floor
     public static final BlockEntry<Block> INDUSTRIAL_FLOOR = simpleBlock("industrial_floor", MapColor.TERRACOTTA_GRAY, SoundType.METAL)
             .recipe((c, p) ->
                     p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2))
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Gold Floor
     public static  final  BlockEntry<Block> GOLD_FLOOR = simpleBlock("gold_floor", MapColor.TERRACOTTA_YELLOW, SoundType.METAL)
             .recipe((c, p) ->
                     p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_GOLD), RecipeCategory.BUILDING_BLOCKS, c, 2))
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Iron Floor
     public static final BlockEntry<Block> IRON_FLOOR = simpleBlock("iron_floor", MapColor.TERRACOTTA_WHITE, SoundType.METAL)
             .recipe((c, p) ->
                     p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_IRON), RecipeCategory.BUILDING_BLOCKS, c ,2))
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
     // Netherite Floor
@@ -620,24 +662,25 @@ public class DDBlocks {
                 p.stonecutting(DataIngredient.items(Items.NETHERITE_INGOT), RecipeCategory.BUILDING_BLOCKS, c, 2);
                 p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 1);
             })
-            .simpleItem()
+            .transform(noBlockState())
+            .transform(itemWithoutModel())
             .register();
 
 
-    public static final BlockEntry<Block> WEATHERED_LIMESTONE = simpleStoneBlock("weathered_limestone", MapColor.COLOR_GRAY, SoundType.STONE, "weathered_limestone").register();
-    public static final BlockEntry<Block> GABBRO = simpleStoneBlock("gabbro", MapColor.COLOR_GRAY, SoundType.STONE, "gabbro").register();
-    public static final BlockEntry<Block> DOLOMITE = simpleStoneBlock("dolomite", MapColor.COLOR_GRAY, SoundType.STONE, "dolomite").register();
+    public static final BlockEntry<Block> WEATHERED_LIMESTONE = simpleStoneBlock("weathered_limestone", MapColor.COLOR_GRAY, SoundType.STONE, "weathered_limestone").transform(noBlockState()).transform(itemWithoutModel()).register();
+    public static final BlockEntry<Block> GABBRO = simpleStoneBlock("gabbro", MapColor.COLOR_GRAY, SoundType.STONE, "gabbro").transform(noBlockState()).transform(itemWithoutModel()).register();
+    public static final BlockEntry<Block> DOLOMITE = simpleStoneBlock("dolomite", MapColor.COLOR_GRAY, SoundType.STONE, "dolomite").transform(noBlockState()).transform(itemWithoutModel()).register();
 
     static {
-        registerStoneBlockSet("stone", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
-        registerStoneBlockSet("packed_mud", MapColor.COLOR_LIGHT_GRAY, SoundType.MUD_BRICKS);
-        registerStoneBlockSet("amethyst", MapColor.TERRACOTTA_WHITE, SoundType.AMETHYST);
-        registerStoneBlockSet("netherrack", MapColor.TERRACOTTA_RED, SoundType.NETHERRACK);
-        registerStoneBlockSet("basalt", MapColor.TERRACOTTA_GRAY, SoundType.BASALT);
-        registerStoneBlockSet("blackstone", MapColor.TERRACOTTA_BLACK, SoundType.STONE);
-        registerStoneBlockSet("weathered_limestone", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
-        registerStoneBlockSet("gabbro", MapColor.TERRACOTTA_ORANGE, SoundType.STONE);
-        registerStoneBlockSet("dolomite", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("stone", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("packed_mud", MapColor.COLOR_LIGHT_GRAY, SoundType.MUD_BRICKS);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("amethyst", MapColor.TERRACOTTA_WHITE, SoundType.AMETHYST);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("netherrack", MapColor.TERRACOTTA_RED, SoundType.NETHERRACK);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("basalt", MapColor.TERRACOTTA_GRAY, SoundType.BASALT);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("blackstone", MapColor.TERRACOTTA_BLACK, SoundType.STONE);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("weathered_limestone", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("gabbro", MapColor.TERRACOTTA_ORANGE, SoundType.STONE);
+        registerStoneBlockSetWithoutBlockStateAndItemModel("dolomite", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
     }
 
     public static void register() {}

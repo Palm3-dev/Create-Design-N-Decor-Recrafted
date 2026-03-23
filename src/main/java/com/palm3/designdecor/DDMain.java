@@ -99,14 +99,4 @@ public class DDMain {
             }
         }
     }
-
-    /*private void onGatherData(GatherDataEvent event) {
-        //DDBlocks.register();
-        DataGenerator gen = event.getGenerator();
-        PackOutput output = gen.getPackOutput();
-        ExistingFileHelper efh = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-
-        //event.getGenerator().addProvider(true, new ModBlockTagsProvider(output, lookupProvider, efh));
-    }*/
 }
