@@ -38,7 +38,6 @@ public class DDMain {
         var modEventBus = context.getModEventBus();
         DD_REGISTRATE.registerEventListeners(modEventBus);
         modEventBus.addListener(this::addPackFinders);
-        //modEventBus.addListener(this::onGatherData);
         // Registrations
         DDBlocks.register();
         DDTabs.DD_TABS.register(modEventBus);

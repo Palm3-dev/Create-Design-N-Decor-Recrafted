@@ -97,9 +97,9 @@ public class FrontlightBlock extends Block {
     public void neighborChanged(BlockState state, Level level, @NotNull BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
         boolean powered = level.hasNeighborSignal(pos);
         if (powered) {
-            level.setBlock(pos, state.setValue(LIT, false), 3);
-        } else {
             level.setBlock(pos, state.setValue(LIT, true), 3);
+        } else {
+            level.setBlock(pos, state.setValue(LIT, false), 3);
         }
     }
 
