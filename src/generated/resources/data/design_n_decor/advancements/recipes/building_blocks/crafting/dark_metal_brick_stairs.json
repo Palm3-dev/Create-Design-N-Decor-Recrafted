@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dark_metal_brick_stairs": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "design_n_decor:dark_metal_brick_stairs"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "design_n_decor:crafting/dark_metal_brick_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_dark_metal_brick_stairs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "design_n_decor:crafting/dark_metal_brick_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

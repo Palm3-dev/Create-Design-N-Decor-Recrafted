@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/packed_mud"
+  },
+  "result": "design_n_decor:small_packed_mud_brick_stairs"
+}

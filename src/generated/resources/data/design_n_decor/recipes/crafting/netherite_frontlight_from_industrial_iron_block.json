@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "create:industrial_iron_block"
+    },
+    "L": [
+      {
+        "item": "minecraft:blaze_rod"
+      },
+      {
+        "item": "minecraft:glowstone_dust"
+      },
+      {
+        "item": "minecraft:prismarine_crystals"
+      }
+    ],
+    "S": {
+      "tag": "forge:stone"
+    }
+  },
+  "pattern": [
+    "LI ",
+    "IS "
+  ],
+  "result": {
+    "item": "design_n_decor:netherite_frontlight"
+  },
+  "show_notification": true
+}

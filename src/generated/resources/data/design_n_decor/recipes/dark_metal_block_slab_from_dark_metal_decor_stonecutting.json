@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "design_n_decor:dark_metal_decor"
+  },
+  "result": "design_n_decor:dark_metal_block_slab"
+}

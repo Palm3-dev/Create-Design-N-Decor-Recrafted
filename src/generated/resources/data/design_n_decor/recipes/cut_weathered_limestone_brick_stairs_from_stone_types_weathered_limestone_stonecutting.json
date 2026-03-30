@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/weathered_limestone"
+  },
+  "result": "design_n_decor:cut_weathered_limestone_brick_stairs"
+}

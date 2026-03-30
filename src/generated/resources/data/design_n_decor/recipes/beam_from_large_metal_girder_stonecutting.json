@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "design_n_decor:large_metal_girder"
+  },
+  "result": "design_n_decor:beam"
+}

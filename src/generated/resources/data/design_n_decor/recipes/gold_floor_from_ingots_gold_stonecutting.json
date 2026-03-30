@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "forge:ingots/gold"
+  },
+  "result": "design_n_decor:gold_floor"
+}

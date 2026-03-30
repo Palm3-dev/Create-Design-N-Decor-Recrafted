@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "tag": "forge:dyes/red"
+    },
+    "S": {
+      "tag": "design_n_decor:stone_metals"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SDS",
+    "SSS"
+  ],
+  "result": {
+    "count": 8,
+    "item": "design_n_decor:red_stone_metal"
+  },
+  "show_notification": true
+}

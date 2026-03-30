@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "design_n_decor:ornate_iron_glass"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "item": "design_n_decor:ornate_iron_glass_pane"
+  },
+  "show_notification": true
+}

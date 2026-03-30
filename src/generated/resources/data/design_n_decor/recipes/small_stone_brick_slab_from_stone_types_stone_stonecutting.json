@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/stone"
+  },
+  "result": "design_n_decor:small_stone_brick_slab"
+}

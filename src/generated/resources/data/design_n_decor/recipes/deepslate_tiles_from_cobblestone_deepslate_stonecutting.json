@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "forge:cobblestone/deepslate"
+  },
+  "result": "design_n_decor:deepslate_tiles"
+}

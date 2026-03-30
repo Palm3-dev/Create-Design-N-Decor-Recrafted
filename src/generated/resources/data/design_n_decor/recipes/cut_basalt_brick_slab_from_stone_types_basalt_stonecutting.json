@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/basalt"
+  },
+  "result": "design_n_decor:cut_basalt_brick_slab"
+}

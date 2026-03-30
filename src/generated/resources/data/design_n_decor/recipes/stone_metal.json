@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "create:asurine"
+    },
+    "P": {
+      "tag": "forge:plates"
+    }
+  },
+  "pattern": [
+    "AP",
+    "PA"
+  ],
+  "result": {
+    "count": 4,
+    "item": "design_n_decor:stone_metal"
+  },
+  "show_notification": true
+}

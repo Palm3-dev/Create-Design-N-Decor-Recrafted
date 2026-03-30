@@ -1,0 +1,18 @@
+{
+  "values": [
+    "design_n_decor:cut_dolomite",
+    "design_n_decor:polished_cut_dolomite",
+    "design_n_decor:cut_dolomite_bricks",
+    "design_n_decor:small_dolomite_bricks",
+    "design_n_decor:cut_dolomite_stairs",
+    "design_n_decor:polished_cut_dolomite_stairs",
+    "design_n_decor:cut_dolomite_brick_stairs",
+    "design_n_decor:small_dolomite_brick_stairs",
+    "design_n_decor:cut_dolomite_wall",
+    "design_n_decor:polished_cut_dolomite_wall",
+    "design_n_decor:cut_dolomite_bricks_wall",
+    "design_n_decor:small_dolomite_bricks_wall",
+    "design_n_decor:layered_dolomite",
+    "design_n_decor:dolomite_pillar"
+  ]
+}

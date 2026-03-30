@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stone_types_amethyst": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "design_n_decor:stone_types/amethyst"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "design_n_decor:polished_cut_amethyst_from_stone_types_amethyst_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_stone_types_amethyst",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "design_n_decor:polished_cut_amethyst_from_stone_types_amethyst_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

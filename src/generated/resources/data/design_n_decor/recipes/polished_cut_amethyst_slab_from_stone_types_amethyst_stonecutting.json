@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/amethyst"
+  },
+  "result": "design_n_decor:polished_cut_amethyst_slab"
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "create:metal_girder"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#  "
+  ],
+  "result": {
+    "count": 2,
+    "item": "design_n_decor:diagonal_girder"
+  },
+  "show_notification": true
+}

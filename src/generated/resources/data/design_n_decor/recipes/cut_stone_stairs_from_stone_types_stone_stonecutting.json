@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "design_n_decor:stone_types/stone"
+  },
+  "result": "design_n_decor:cut_stone_stairs"
+}

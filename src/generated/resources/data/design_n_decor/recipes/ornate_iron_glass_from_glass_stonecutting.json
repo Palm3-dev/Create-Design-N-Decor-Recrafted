@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "forge:glass"
+  },
+  "result": "design_n_decor:ornate_iron_glass"
+}

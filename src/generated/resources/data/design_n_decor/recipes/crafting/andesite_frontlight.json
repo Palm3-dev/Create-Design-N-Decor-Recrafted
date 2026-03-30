@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "item": "create:andesite_alloy"
+    },
+    "l": [
+      {
+        "item": "minecraft:blaze_rod"
+      },
+      {
+        "item": "minecraft:glowstone_dust"
+      },
+      {
+        "item": "minecraft:prismarine_crystals"
+      }
+    ],
+    "s": {
+      "tag": "forge:stone"
+    }
+  },
+  "pattern": [
+    "li ",
+    "is "
+  ],
+  "result": {
+    "count": 4,
+    "item": "design_n_decor:andesite_frontlight"
+  },
+  "show_notification": true
+}
