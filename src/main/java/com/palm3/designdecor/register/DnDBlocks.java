@@ -151,15 +151,13 @@ public class DnDBlocks {
                     case TOP -> modelFile = modelTop;
                     case BOTTOM -> modelFile = modelBottom;
                     case BOTH -> modelFile = modelBoth;
-                    default -> throw new AmbiguousMatchException(null, null);
+                    default -> modelFile = modelBoth/*throw new AmbiguousMatchException(null, null)*/;
                 }
 
                 ModelFile.ExistingModelFile model = modelFile;
                 return ConfiguredModel.builder().modelFile(model).build();
             }))
-            .item().model((c, p) -> {
-                p.blockItem(c::get, "_item");
-            }).build()
+            .item().model((c, p) -> p.blockItem(c::get, "_item")).build()
             .loot(RegistrateBlockLootTables::dropSelf)
             .recipe((c, p) -> {
                 p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_IRON), RecipeCategory.BUILDING_BLOCKS, c, 2);
