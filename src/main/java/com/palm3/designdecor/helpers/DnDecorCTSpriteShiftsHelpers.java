@@ -4,68 +4,68 @@ import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 
-import static com.palm3.designdecor.DDMain.asResource;
+import static com.palm3.designdecor.DDMain.asDDResource;
 
-public class DDCTSpriteShiftsHelpers {
+public class DnDecorCTSpriteShiftsHelpers {
     //============================= CTSpriteShifts =============================
     // By "Connected" i mean that the texture name has "_connected" at the end. Location (or Loc) means that the textures are not in the default textures/block folder
 
     /// Only for textures that are in /block directory.
-    public static CTSpriteShiftEntry omniConnected(String texture_name) {
+    public static CTSpriteShiftEntry omniDDConnected(String texture_name) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.OMNIDIRECTIONAL,
-                asResource("block/" + texture_name),
-                asResource("block/" + texture_name + "_connected")
+                asDDResource("block/" + texture_name),
+                asDDResource("block/" + texture_name + "_connected")
         );
     }
 
 
     /// You can specify paths within the /block directory.
     /// The texture parameter can also accept paths if you need it.
-    public static CTSpriteShiftEntry omniLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
+    public static CTSpriteShiftEntry omniDDLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.OMNIDIRECTIONAL,
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
         );
     }
 
     /// Only for textures that are in /block directory.
-    public static CTSpriteShiftEntry rectangleConnected(String texture_name) {
+    public static CTSpriteShiftEntry rectangleDDConnected(String texture_name) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.RECTANGLE,
-                asResource("block/" + texture_name),
-                asResource("block/" + texture_name + "_connected")
+                asDDResource("block/" + texture_name),
+                asDDResource("block/" + texture_name + "_connected")
         );
     }
 
     /// You can specify paths within the /block directory.
     /// The texture parameter can also accept paths if you need it.
-    public static CTSpriteShiftEntry rectangleLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
+    public static CTSpriteShiftEntry rectangleDDLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.RECTANGLE,
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
         );
     }
 
     /// You can specify paths within the /block directory.
     /// The texture parameter can also accept paths if you need it.
-    public static CTSpriteShiftEntry horizKryppersLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
+    public static CTSpriteShiftEntry horizKryppersDDLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.HORIZONTAL_KRYPPERS,
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
-            asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
         );
     }
 
     /// You can specify paths within the /block directory.
     /// The texture parameter can also accept paths if you need it.
-    public static CTSpriteShiftEntry verticalLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
+    public static CTSpriteShiftEntry verticalDDLocationConnected(String texture_dir_loc, String texture_name_accepts_path) {
         return CTSpriteShifter.getCT(
                 AllCTTypes.VERTICAL,
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
-                asResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path),
+                asDDResource("block/" + texture_dir_loc + "/" + texture_name_accepts_path + "_connected")
         );
     }
 

@@ -9,15 +9,15 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class DDTabs {
+public class DnDTabs {
     public static final DeferredRegister<CreativeModeTab> DD_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DDMain.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> MAIN_TAB = DD_TABS
             .register("main_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.dndecor.base"))
-                    .icon(() -> new ItemStack(Items.ACACIA_BUTTON))
+                    .icon(() -> new ItemStack(DnDBlocks.BRASS_FRONTLIGHT))
                     .displayItems((params, output) -> {
-                        DDMain.DD_REGISTRATE.getAll(Registries.BLOCK)
+                        DDMain.DND_REGISTRATE.getAll(Registries.BLOCK)
                                 .forEach(entry -> output.accept(entry.get().asItem()));
                     })
                     .build()

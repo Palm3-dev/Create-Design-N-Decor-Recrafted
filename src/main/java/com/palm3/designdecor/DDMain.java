@@ -1,8 +1,8 @@
 package com.palm3.designdecor;
 
 import com.mojang.logging.LogUtils;
-import com.palm3.designdecor.register.DDBlocks;
-import com.palm3.designdecor.register.DDTabs;
+import com.palm3.designdecor.register.DnDBlocks;
+import com.palm3.designdecor.register.DnDTabs;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -28,27 +28,37 @@ import java.nio.file.Path;
 
 @Mod(DDMain.MOD_ID)
 public class DDMain {
-    public static final String MOD_ID = "dndecor";
+    public static final String MOD_ID = "design_n_decor";
+    public static final String ORIGINAL_MOD_ID = "dndecor";
     public static final String DND_JAR_VERSION = "Design-n-Decor-1.21.1-2.1.0.jar";  // Correct dnd jar file for this mod release
-    public static final CreateRegistrate DD_REGISTRATE = CreateRegistrate.create(MOD_ID).defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
+    public static final CreateRegistrate DND_REGISTRATE = CreateRegistrate.create(MOD_ID).defaultCreativeTab((ResourceKey<CreativeModeTab>) null);
     public static final Logger LOGGER = LogUtils.getLogger();
 
 
     public DDMain(FMLJavaModLoadingContext context) {
         var modEventBus = context.getModEventBus();
-        DD_REGISTRATE.registerEventListeners(modEventBus);
+        DND_REGISTRATE.registerEventListeners(modEventBus);
         modEventBus.addListener(this::addPackFinders);
         // Registrations
-        DDBlocks.register();
-        DDTabs.DD_TABS.register(modEventBus);
+        DnDBlocks.register();
+        DnDTabs.DD_TABS.register(modEventBus);
+        //DDBlockEntities.register();
     }
 
+    // Resources methods
+    /// Returns a ResourceLocation with this mod namespace and the given path.
     public static ResourceLocation asResource(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
+    /// Returns a ResourceLocation with given namespace and the given path.
     public static ResourceLocation asExternalResource(String namespace, String path) {
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
+    }
+
+    /// Returns a ResourceLocation with the DD namespace and the given path.
+    public static ResourceLocation asDDResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(ORIGINAL_MOD_ID, path);
     }
 
     // Design 'N' Decor Assets loading

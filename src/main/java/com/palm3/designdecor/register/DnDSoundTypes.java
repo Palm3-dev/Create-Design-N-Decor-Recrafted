@@ -3,7 +3,7 @@ package com.palm3.designdecor.register;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 
-public class DDSoundTypes {
+public class DnDSoundTypes {
     public static SoundType CRACKLE_STONE = new SoundType(0.9f, 0.7f,
             SoundEvents.GILDED_BLACKSTONE_BREAK,
             SoundEvents.GILDED_BLACKSTONE_STEP,
