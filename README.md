@@ -45,7 +45,7 @@ Follow this table to know which version of Design 'N' Decor (DnD) you need to in
 ## FAQ
 Q. Why are my textures and models broken?
 
-A. Most probably you don't have the original Design 'N' Decor file in the mods folder, or it's the wrong one. Check the [installation](https://github.com/PalmeProg/Create-Design-N-Decor-to-1.20.1/edit/1.20.1-main/README.md#installation).
+A. Most probably you don't have the original Design 'N' Decor file in the mods folder, or it's the wrong one.
 
 
 Q. Do i need to also install Design 'N' Decor?
