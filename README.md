@@ -1,7 +1,7 @@
 # Create Design 'N' Decor updated by Palm3
 
 ## Content
-
+![Alt](/images/1.0.0.png "Decorations in 1.0.0 (stone variants not in the image but they're there)")
 ## Download
 The mod is avaiable for 1.20.1 Forge on both CurseForge and Modrinth.
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/design-n-decor-recrafted)
