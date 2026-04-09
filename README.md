@@ -4,7 +4,7 @@
 Kind of a backport of Create: Design 'N' Decor.
 
 ## Content
-In *beta 1.0.0-hotfix1* this is fully implemented:
+In *beta 1.0.1-hotfix1* this is fully implemented:
 - Deepslate tiles/red tiles
 - Ornate iron glass window/pane/grate (the casing thing)
 - Industrial plating
