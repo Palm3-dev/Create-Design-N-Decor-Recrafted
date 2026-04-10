@@ -17,6 +17,8 @@ In *beta 1.0.1-hotfix1* this is fully implemented:
 - Metals floors (andesite, brass...)
 - All stone block set variants (pillar, bricks, slabs...)
 
+If you are interested in the mod development, see the currently added things on the repo but that are not on the main releases yet [here](https://github.com/Palm3-dev/Create-Design-N-Decor-Recrafted/blob/1.20.1-main/IN_CURRENT_GIT.txt).
+
 ## Download
 The mod is avaiable for **1.20.1 Forge** on both CurseForge and Modrinth.
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/design-n-decor-recrafted)
