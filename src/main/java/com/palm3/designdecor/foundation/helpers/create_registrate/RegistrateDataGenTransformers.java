@@ -340,7 +340,7 @@ public class RegistrateDataGenTransformers {
         /**
          * Transformer that creates a model, blockstate and item for a normal block.
          * @param namespace The namespace where to search the texture.
-         * @param textureDir The directory where to search the top and bottom texture. If null, default id block/block_name
+         * @param textureDir The directory where to search the texture. If null, default id block/block_name
          * @param tags The item tags that the block can have, can be null.
          * @return BlockState, Model and Item builder with given texture path.
          */

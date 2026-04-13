@@ -116,7 +116,7 @@ public class RegistrateBlockBuildingHelpers {
 
 
     public static class BlockBuilders {
-        /* ****************** CASINGS ****************** */
+        /* ****************** CASING ****************** */
         /**
          * @param nameOrMaterial The name of the block.
          * @param mapColor The map color of the block.
@@ -125,7 +125,7 @@ public class RegistrateBlockBuildingHelpers {
          * @return Basic BlockBuilder for a CasingBlock
          */
         public static BlockBuilder<CasingBlock, CreateRegistrate> simpleCasing(String nameOrMaterial, MapColor mapColor, SoundType soundType, String texture) {
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, CasingBlock::new)
                     .transform(BuilderTransformers.casing(() -> omniConn(ORIGINAL_MOD_ID, texture)))
                     .initialProperties(SharedProperties::softMetal)
@@ -137,27 +137,11 @@ public class RegistrateBlockBuildingHelpers {
 
         /* ****************** GLASS ****************** */
 
-        /// Returns the base BlockBuilder for a ConnectedGlassBlock with properties and connected textures (in the block/palettes/ directory).
-        public static BlockBuilder<ConnectedGlassBlock, CreateRegistrate> simpleConnectedGlass(String name, String texture, String topTexture) {
-            return DND_REGISTRATE
+        /// Returns the base BlockBuilder for a ConnectedGlassBlock with properties and connected textures.
+        public static BlockBuilder<ConnectedGlassBlock, CreateRegistrate> simpleConnectedGlass(String name, String texturePath, String topTexturePath) {
+            return getRegistrate()
                     .block(name, ConnectedGlassBlock::new)
-                    .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConn(ORIGINAL_MOD_ID, "palettes/" + texture), omniConn(ORIGINAL_MOD_ID, "/" + topTexture))))
-                    .addLayer(() -> RenderType::cutout)
-                    .initialProperties(() -> Blocks.GLASS)
-                    .properties(p -> p
-                            .isValidSpawn((state, getter, pos, entityType) -> false)
-                            .isRedstoneConductor((state, getter, pos) -> false)
-                            .isSuffocating((state, getter, pos) -> false)
-                            .isViewBlocking((state, getter, pos) -> false))
-                    .loot(RegistrateBlockLootTables::dropWhenSilkTouch)
-                    .tag(Tags.Blocks.GLASS, BlockTags.IMPERMEABLE);
-        }
-
-        /// Returns the base BlockBuilder for a ConnectedGlassBlock with properties and connected textures (in the given directory/path).
-        public static BlockBuilder<ConnectedGlassBlock, CreateRegistrate> simpleConnectedGlass(String name, String texturePath, String texture, String topTexture) {
-            return DND_REGISTRATE
-                    .block(name, ConnectedGlassBlock::new)
-                    .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConn(ORIGINAL_MOD_ID, texturePath + "/" + texture), omniConn(ORIGINAL_MOD_ID, texturePath + "/"+topTexture))))
+                    .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConn(ORIGINAL_MOD_ID, texturePath), omniConn(ORIGINAL_MOD_ID, topTexturePath))))
                     .addLayer(() -> RenderType::cutout)
                     .initialProperties(() -> Blocks.GLASS)
                     .properties(p -> p
@@ -171,7 +155,7 @@ public class RegistrateBlockBuildingHelpers {
 
 
         /* ****************** CONNECTED PILLAR ****************** */
-
+//todo revise pillar and glass
         /**
          * @param nameOrMaterial The name of the block.
          * @param _pillarSuffix If true, _pillar will be automatically added, unless it's already at the end of the name.
@@ -183,7 +167,7 @@ public class RegistrateBlockBuildingHelpers {
          */
         public static BlockBuilder<ConnectedPillarBlock, CreateRegistrate> simpleConnectedPillar(String nameOrMaterial, boolean _pillarSuffix, MapColor mapColor, SoundType soundType, String texture, String topTexture) {
             if (_pillarSuffix && !nameOrMaterial.endsWith("_pillar")) nameOrMaterial += "_pillar";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, ConnectedPillarBlock::new)
                     .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(rectangleConn(ORIGINAL_MOD_ID, texture), omniConn(ORIGINAL_MOD_ID, topTexture))))
                     .initialProperties(SharedProperties::softMetal)
@@ -204,7 +188,7 @@ public class RegistrateBlockBuildingHelpers {
          */
         public static BlockBuilder<ConnectedPillarBlock, CreateRegistrate> simpleConnectedPillar(String nameOrMaterial, boolean _pillarSuffix, MapColor mapColor, SoundType soundType, String texturePath, String texture, String topTexture) {
             if (_pillarSuffix && !nameOrMaterial.endsWith("_pillar")) nameOrMaterial += "_pillar";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, ConnectedPillarBlock::new)
                     .onRegister(connectedTextures(() -> new RotatedPillarCTBehaviour(rectangleConn(ORIGINAL_MOD_ID, texturePath + "/" + texture), omniConn(ORIGINAL_MOD_ID, texturePath + "/" + topTexture))))
                     .initialProperties(SharedProperties::softMetal)
@@ -222,7 +206,7 @@ public class RegistrateBlockBuildingHelpers {
          * @return Basic BlockBuilder for a Block.
          */
         public static BlockBuilder<Block, CreateRegistrate> simpleBlock(String nameOrMaterial, MapColor mapColor, SoundType soundType) {
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, Block::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.mapColor(mapColor).sound(soundType).requiresCorrectToolForDrops())
@@ -240,7 +224,7 @@ public class RegistrateBlockBuildingHelpers {
          */
         public static BlockBuilder<SlabBlock, CreateRegistrate> simpleSlabBlock(String nameOrMaterial, MapColor mapColor, SoundType sound) {
             if (!nameOrMaterial.endsWith("_slab")) nameOrMaterial += "_slab";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, SlabBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
@@ -258,7 +242,7 @@ public class RegistrateBlockBuildingHelpers {
          */
         public static BlockBuilder<StairBlock, CreateRegistrate> simpleStairBlock(String nameOrMaterial, Supplier<Block> parentBlock, MapColor mapColor, SoundType sound) {
             if (!nameOrMaterial.endsWith("_stairs")) nameOrMaterial += "_stairs";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, p -> new StairBlock(parentBlock.get().defaultBlockState(), p))
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
@@ -276,7 +260,7 @@ public class RegistrateBlockBuildingHelpers {
          */
         public static BlockBuilder<WallBlock, CreateRegistrate> simpleWallBlock(String nameOrMaterial, MapColor mapColor, SoundType sound) {
             if (!nameOrMaterial.endsWith("_wall")) nameOrMaterial += "_wall";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(nameOrMaterial, WallBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
@@ -295,7 +279,7 @@ public class RegistrateBlockBuildingHelpers {
          * */
         public static BlockBuilder<SquareSignBlock, CreateRegistrate> simpleSquareSignBlock(String name, ResourceLocation itemModelTexture, @Nullable String itemTag, @Nullable String forgeIngotTagForRecipe) {
             if (!name.endsWith("_sign")) name += "_sign";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(name, SquareSignBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
@@ -319,7 +303,7 @@ public class RegistrateBlockBuildingHelpers {
          * */
         public static BlockBuilder<RotableSquareSignBlock, CreateRegistrate> rotableSquareSignBlock(String name, ResourceLocation itemModelTexture, @Nullable String itemTag, @Nullable String forgeIngotTagForRecipe) {
             if (!name.endsWith("_sign")) name += "_sign";
-            return DND_REGISTRATE
+            return getRegistrate()
                     .block(name, RotableSquareSignBlock::new)
                     .initialProperties(SharedProperties::softMetal)
                     .properties(p -> p.mapColor(MapColor.TERRACOTTA_YELLOW).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
