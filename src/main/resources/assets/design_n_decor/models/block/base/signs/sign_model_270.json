@@ -1,0 +1,23 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench by Palm3, feel free to use this file in your mod!",
+	"textures": {
+		"0": "dndecor:block/old/letter_signs/blank",
+		"particle": "dndecor:block/old/letter_signs/blank"
+	},
+	"elements": [
+		{
+			"from": [1, 1, 15],
+			"to": [15, 15, 16],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 8, 15]},
+			"faces": {
+				"north": {"uv": [1, 1, 15, 15], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [1, 1, 15, 2], "rotation": 90, "texture": "#0"},
+				"south": {"uv": [1, 1, 15, 15], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [1, 14, 15, 15], "rotation": 90, "texture": "#0"},
+				"up": {"uv": [1, 1, 2, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [14, 1, 15, 15], "rotation": 90, "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,3 +1,8 @@
 {
-  "parent": "dndecor:block/cut_weathered_limestone_stairs"
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dndecor:block/palettes/stone_types/cut/weathered_limestone_cut",
+    "side": "dndecor:block/palettes/stone_types/cut/weathered_limestone_cut",
+    "top": "dndecor:block/palettes/stone_types/cut/weathered_limestone_cut"
+  }
 }

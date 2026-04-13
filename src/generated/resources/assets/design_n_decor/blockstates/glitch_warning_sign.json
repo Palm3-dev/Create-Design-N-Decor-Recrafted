@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign"
+    },
+    "facing=south": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "design_n_decor:block/signs/glitch_warning_sign",
+      "y": 270
+    }
+  }
+}

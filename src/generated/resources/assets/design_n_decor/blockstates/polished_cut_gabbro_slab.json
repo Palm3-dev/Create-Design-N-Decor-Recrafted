@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
-      "model": "design_n_decor:block/polished_cut_gabbro_slab"
+    "type=bottom": {
+      "model": "design_n_decor:block/polished_cut_gabbro_slab_bottom"
+    },
+    "type=double": {
+      "model": "design_n_decor:block/polished_cut_gabbro_slab_full_block"
+    },
+    "type=top": {
+      "model": "design_n_decor:block/polished_cut_gabbro_slab_top"
     }
   }
 }

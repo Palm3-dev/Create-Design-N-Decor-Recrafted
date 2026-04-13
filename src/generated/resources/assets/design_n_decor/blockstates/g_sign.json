@@ -1,0 +1,96 @@
+{
+  "variants": {
+    "axis_rot=rot0,facing=down": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0",
+      "x": 90
+    },
+    "axis_rot=rot0,facing=east": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0",
+      "y": 90
+    },
+    "axis_rot=rot0,facing=north": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0"
+    },
+    "axis_rot=rot0,facing=south": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0",
+      "y": 180
+    },
+    "axis_rot=rot0,facing=up": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0",
+      "x": 270
+    },
+    "axis_rot=rot0,facing=west": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_0",
+      "y": 270
+    },
+    "axis_rot=rot180,facing=down": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180",
+      "x": 90
+    },
+    "axis_rot=rot180,facing=east": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180",
+      "y": 90
+    },
+    "axis_rot=rot180,facing=north": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180"
+    },
+    "axis_rot=rot180,facing=south": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180",
+      "y": 180
+    },
+    "axis_rot=rot180,facing=up": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180",
+      "x": 270
+    },
+    "axis_rot=rot180,facing=west": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_180",
+      "y": 270
+    },
+    "axis_rot=rot270,facing=down": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270",
+      "x": 90
+    },
+    "axis_rot=rot270,facing=east": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270",
+      "y": 90
+    },
+    "axis_rot=rot270,facing=north": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270"
+    },
+    "axis_rot=rot270,facing=south": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270",
+      "y": 180
+    },
+    "axis_rot=rot270,facing=up": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270",
+      "x": 270
+    },
+    "axis_rot=rot270,facing=west": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_270",
+      "y": 270
+    },
+    "axis_rot=rot90,facing=down": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90",
+      "x": 90
+    },
+    "axis_rot=rot90,facing=east": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90",
+      "y": 90
+    },
+    "axis_rot=rot90,facing=north": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90"
+    },
+    "axis_rot=rot90,facing=south": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90",
+      "y": 180
+    },
+    "axis_rot=rot90,facing=up": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90",
+      "x": 270
+    },
+    "axis_rot=rot90,facing=west": {
+      "model": "design_n_decor:block/signs/rotable/g_sign_90",
+      "y": 270
+    }
+  }
+}

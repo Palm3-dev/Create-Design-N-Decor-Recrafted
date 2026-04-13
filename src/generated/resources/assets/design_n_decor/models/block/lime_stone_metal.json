@@ -1,3 +1,6 @@
 {
-  "parent": "dndecor:block/lime_stone_metal"
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dndecor:block/stone_metal/lime"
+  }
 }

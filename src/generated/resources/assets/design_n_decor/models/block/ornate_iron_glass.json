@@ -1,3 +1,7 @@
 {
-  "parent": "dndecor:block/ornate_iron_glass"
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dndecor:block/palettes/ornate_iron_glass_end",
+    "side": "dndecor:block/palettes/ornate_iron_glass"
+  }
 }

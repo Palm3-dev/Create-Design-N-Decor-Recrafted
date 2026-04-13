@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "tag": "design_n_decor:square_signs"
+  },
+  "result": "design_n_decor:x_sign"
+}

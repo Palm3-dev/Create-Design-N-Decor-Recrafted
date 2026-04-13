@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "create:industrial_iron_block"
+  },
+  "result": "design_n_decor:dark_metal_brick_wall"
+}

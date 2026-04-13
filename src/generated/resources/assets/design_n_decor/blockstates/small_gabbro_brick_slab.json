@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
-      "model": "design_n_decor:block/small_gabbro_brick_slab"
+    "type=bottom": {
+      "model": "design_n_decor:block/small_gabbro_brick_slab_bottom"
+    },
+    "type=double": {
+      "model": "design_n_decor:block/small_gabbro_brick_slab_full_block"
+    },
+    "type=top": {
+      "model": "design_n_decor:block/small_gabbro_brick_slab_top"
     }
   }
 }

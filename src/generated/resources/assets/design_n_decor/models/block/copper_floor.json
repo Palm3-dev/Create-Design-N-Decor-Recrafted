@@ -1,3 +1,6 @@
 {
-  "parent": "dndecor:block/copper_floor"
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "dndecor:block/copper_floor"
+  }
 }

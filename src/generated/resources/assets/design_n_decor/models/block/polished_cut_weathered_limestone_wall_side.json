@@ -1,3 +1,6 @@
 {
-  "parent": "dndecor:block/polished_cut_weathered_limestone_wall_side"
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "dndecor:block/palettes/stone_types/polished/weathered_limestone_cut_polished"
+  }
 }

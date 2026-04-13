@@ -1,7 +1,13 @@
 {
   "variants": {
-    "": {
-      "model": "design_n_decor:block/dark_metal_block_slab"
+    "type=bottom": {
+      "model": "design_n_decor:block/dark_metal_block_slab_bottom"
+    },
+    "type=double": {
+      "model": "design_n_decor:block/dark_metal_block_slab_double"
+    },
+    "type=top": {
+      "model": "design_n_decor:block/dark_metal_block_slab_top"
     }
   }
 }

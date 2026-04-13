@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dndecor:block/dark_metal_block",
+    "side": "dndecor:block/dark_metal_block_slab"
+  }
+}

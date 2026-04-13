@@ -1,5 +1,7 @@
 {
   "values": [
+    "design_n_decor:dark_metal_block_wall",
+    "design_n_decor:dark_metal_brick_wall",
     "design_n_decor:cut_stone_wall",
     "design_n_decor:polished_cut_stone_wall",
     "design_n_decor:cut_stone_bricks_wall",

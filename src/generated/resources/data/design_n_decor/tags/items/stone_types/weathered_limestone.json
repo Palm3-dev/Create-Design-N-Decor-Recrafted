@@ -1,9 +1,14 @@
 {
   "values": [
+    "design_n_decor:weathered_limestone",
     "design_n_decor:cut_weathered_limestone",
     "design_n_decor:polished_cut_weathered_limestone",
     "design_n_decor:cut_weathered_limestone_bricks",
     "design_n_decor:small_weathered_limestone_bricks",
+    "design_n_decor:cut_weathered_limestone_slab",
+    "design_n_decor:polished_cut_weathered_limestone_slab",
+    "design_n_decor:cut_weathered_limestone_brick_slab",
+    "design_n_decor:small_weathered_limestone_brick_slab",
     "design_n_decor:cut_weathered_limestone_stairs",
     "design_n_decor:polished_cut_weathered_limestone_stairs",
     "design_n_decor:cut_weathered_limestone_brick_stairs",

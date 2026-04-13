@@ -1,0 +1,6 @@
+{
+  "parent": "design_n_decor:block/base/signs/sign_model_90",
+  "textures": {
+    "0": "dndecor:block/old/symbol_signs/o"
+  }
+}

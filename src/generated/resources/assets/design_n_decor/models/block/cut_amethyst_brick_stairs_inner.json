@@ -1,3 +1,8 @@
 {
-  "parent": "dndecor:block/cut_amethyst_brick_stairs_inner"
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "dndecor:block/palettes/stone_types/brick/amethyst_cut_brick",
+    "side": "dndecor:block/palettes/stone_types/brick/amethyst_cut_brick",
+    "top": "dndecor:block/palettes/stone_types/brick/amethyst_cut_brick"
+  }
 }

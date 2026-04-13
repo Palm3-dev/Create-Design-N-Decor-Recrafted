@@ -1,3 +1,6 @@
 {
-  "parent": "dndecor:block/cut_amethyst_wall_side"
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "dndecor:block/palettes/stone_types/cut/amethyst_cut"
+  }
 }
