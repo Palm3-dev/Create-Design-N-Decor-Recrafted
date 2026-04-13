@@ -1,4 +1,4 @@
-package com.palm3.designdecor.blocks.beam;
+package com.palm3.designdecor.content.blocks.beam;
 
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;

@@ -1,4 +1,4 @@
-package com.palm3.designdecor.blocks.diagonal_girder;
+package com.palm3.designdecor.content.blocks.diagonal_girder;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;

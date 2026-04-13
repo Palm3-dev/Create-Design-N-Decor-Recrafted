@@ -1,4 +1,4 @@
-package com.palm3.designdecor.blocks.frontlight;
+package com.palm3.designdecor.content.blocks.frontlight;
 
 import net.minecraft.util.StringRepresentable;
 

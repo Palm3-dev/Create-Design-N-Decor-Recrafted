@@ -1,4 +1,4 @@
-package com.palm3.designdecor.blocks.storage_container;
+package com.palm3.designdecor.content.blocks.storage_container;
 
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;

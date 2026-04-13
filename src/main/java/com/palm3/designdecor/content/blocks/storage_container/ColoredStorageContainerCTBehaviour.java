@@ -1,19 +1,4 @@
-package com.palm3.designdecor.blocks.storage_container;
-
-import com.palm3.designdecor.register.DDSpriteShifts;
-import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlock;
-import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.block.connected.ConnectedTextureBehaviour;
-import javax.annotation.Nullable;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
-import net.minecraft.core.Direction.AxisDirection;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.state.BlockState;
+package com.palm3.designdecor.content.blocks.storage_container;
 
 public class ColoredStorageContainerCTBehaviour /*extends ConnectedTextureBehaviour.Base*/ {
 

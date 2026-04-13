@@ -1,19 +1,6 @@
 package com.palm3.designdecor.register;
 
-import com.palm3.designdecor.DDMain;
-import com.simibubi.create.foundation.block.connected.AllCTTypes;
-import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
-import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
-import com.simibubi.create.foundation.block.connected.CTType;
-import net.createmod.catnip.data.Couple;
-import net.createmod.catnip.render.SpriteShiftEntry;
-import net.createmod.catnip.render.SpriteShifter;
-import net.minecraft.world.item.DyeColor;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class DDSpriteShifts {
+public class DnDSpriteShifts {
 
     /*private static final Map<DyeColor, Couple<CTSpriteShiftEntry>> COLORED_STORAGE_TOP = new HashMap();
     private static final Map<DyeColor, Couple<CTSpriteShiftEntry>> COLORED_STORAGE_FRONT = new HashMap();
