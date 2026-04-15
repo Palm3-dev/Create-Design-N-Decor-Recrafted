@@ -1,6 +1,7 @@
 package com.palm3.designdecor.register;
 
-import com.llamalad7.mixinextras.sugar.Share;
+import com.palm3.designdecor.content.blocks.supports.MetalSupport;
+import com.palm3.designdecor.content.blocks.supports.MetalSupportBlock;
 import com.palm3.designdecor.content.blocks.OrnateGrateBlock;
 import com.palm3.designdecor.content.blocks.sign_blocks.RotableSquareSignBlock;
 import com.palm3.designdecor.content.blocks.sign_blocks.SquareSignBlock;
@@ -11,7 +12,6 @@ import com.palm3.designdecor.content.blocks.frontlight.FrontlightBlock;
 import com.palm3.designdecor.foundation.helpers.DnDHelpers;
 import com.simibubi.create.*;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
-import com.simibubi.create.content.decoration.encasing.CasingConnectivity;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
 import com.simibubi.create.content.decoration.palettes.*;
 import com.simibubi.create.foundation.block.DyedBlockList;
@@ -186,13 +186,43 @@ public class DnDBlocks {
             .register();
 
     // Metal Support - DPM
-    /*public static final BlockEntry<Block> METAL_SUPPORT = DND_REGISTRATE
-            .block("metal_support", Block::new)
+    public static final BlockEntry<MetalSupportBlock> METAL_SUPPORT = DND_REGISTRATE
+            .block("metal_support", MetalSupportBlock::new)
             .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.requiresCorrectToolForDrops().sound(SoundType.NETHERITE_BLOCK))
             .blockstate((c, p) -> {
-                p.models().withExistingParent(c.getName(), )
+                var bottomPole = p.models().getExistingFile(asResource("block/metal_support/bottom_pole"));
+                var middlePole = p.models().getExistingFile(asResource("block/metal_support/middle_pole"));
+                var topPole = p.models().getExistingFile(asResource("block/metal_support/top_pole"));
+                var topBottomSingle = p.models().getExistingFile(asResource("block/metal_support/top_bottom"));
+                var itemModel = p.models().withExistingParent("block/metal_support/item", asDDResource("block/metal_support/item"));
+
+                p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
+                    Direction.Axis axis = state.getValue(MetalSupportBlock.HORIZONTAL_AXIS);
+                    MetalSupport blockType = state.getValue(MetalSupportBlock.BLOCK_TYPE);
+                    ModelFile model;
+
+                    int yRot = 0;
+                    if (axis == Direction.Axis.X) yRot = 90;
+
+                    switch (blockType) {
+                        case TOP_BOTTOM -> model = topBottomSingle;
+                        case BOTTOM -> model = bottomPole;
+                        case MIDDLE -> model = middlePole;
+                        case TOP -> model = topPole;
+                        default -> throw new IllegalArgumentException("Unexpected or invalid blockType:" + blockType);
+                    }
+
+                    return ConfiguredModel.builder().modelFile(model).rotationY(yRot).build();
+                });
             })
-            .register();*/
+            .recipe((c, p) -> {
+                p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+                p.stonecutting(DataIngredient.tag(itemTag("dark_metal_decor")), RecipeCategory.BUILDING_BLOCKS, c, 2);
+            })
+            .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+            .item().model((c, p) -> p.blockItem(c::get, "/item")).build()
+            .register();
 
     // Diagonal Girder Block - DPM
     public static final BlockEntry<DiagonalGirderBlock> DIAGONAL_GIRDER_BLOCK = DND_REGISTRATE

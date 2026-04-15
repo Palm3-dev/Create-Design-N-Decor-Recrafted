@@ -1,0 +1,32 @@
+{
+  "variants": {
+    "axis=x,block_type=bottom": {
+      "model": "design_n_decor:block/metal_support/bottom_pole",
+      "y": 90
+    },
+    "axis=x,block_type=middle": {
+      "model": "design_n_decor:block/metal_support/middle_pole",
+      "y": 90
+    },
+    "axis=x,block_type=top": {
+      "model": "design_n_decor:block/metal_support/top_pole",
+      "y": 90
+    },
+    "axis=x,block_type=top_bottom": {
+      "model": "design_n_decor:block/metal_support/top_bottom",
+      "y": 90
+    },
+    "axis=z,block_type=bottom": {
+      "model": "design_n_decor:block/metal_support/bottom_pole"
+    },
+    "axis=z,block_type=middle": {
+      "model": "design_n_decor:block/metal_support/middle_pole"
+    },
+    "axis=z,block_type=top": {
+      "model": "design_n_decor:block/metal_support/top_pole"
+    },
+    "axis=z,block_type=top_bottom": {
+      "model": "design_n_decor:block/metal_support/top_bottom"
+    }
+  }
+}

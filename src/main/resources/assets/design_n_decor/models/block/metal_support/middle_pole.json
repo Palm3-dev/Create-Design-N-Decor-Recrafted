@@ -1,0 +1,24 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "dndecor:block/old/metal_support_side_connected",
+		"1": "dndecor:block/old/metal_support_top",
+		"particle": "dndecor:block/old/metal_support_side_connected"
+	},
+	"elements": [
+		{
+			"from": [4, 0, 4],
+			"to": [12, 16, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [4, 0, 4]},
+			"faces": {
+				"north": {"uv": [10, 8, 14, 16], "texture": "#0"},
+				"east": {"uv": [10, 8, 14, 16], "texture": "#0"},
+				"south": {"uv": [10, 8, 14, 16], "texture": "#0"},
+				"west": {"uv": [10, 8, 14, 16], "texture": "#0"},
+				"up": {"uv": [4, 4, 12, 12], "texture": "#1"},
+				"down": {"uv": [4, 4, 12, 12], "texture": "#1"}
+			}
+		}
+	]
+}
