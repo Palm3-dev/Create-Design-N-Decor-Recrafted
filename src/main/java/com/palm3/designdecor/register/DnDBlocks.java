@@ -76,7 +76,7 @@ public class DnDBlocks {
             .register();
 
     // Ornate Iron Glass
-    public static final BlockEntry<ConnectedGlassBlock> ORNATE_IRON_GLASS = simpleConnectedGlass("ornate_iron_glass", "ornate_iron_glass", "ornate_iron_glass_end")
+    public static final BlockEntry<ConnectedGlassBlock> ORNATE_IRON_GLASS = simpleConnectedGlass("ornate_iron_glass", "palettes/ornate_iron_glass", "palettes/ornate_iron_glass_end")
             .blockstate((c, p) -> {
                 var model = p.models().withExistingParent(c.getName(), asNamespaceResource("minecraft", "block/cube_column"))
                         .texture("end", asDDResource("block/palettes/ornate_iron_glass_end"))
