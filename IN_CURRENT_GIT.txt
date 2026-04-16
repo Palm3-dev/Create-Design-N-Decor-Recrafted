@@ -7,7 +7,7 @@ Here are the things currently ported in this repository, not on the mod releases
 - Large metal girder, beam, diagonal girder, metal support, diagonal metal support
 - Zinc bricks/checker tiles
 - Stone metal/colored stone metal
-- Velevet blocks
+- Velvet blocks
 - Dark metal set (stairs, WALLS, slabs, plating...)
 - Frontlights
 - Metals floors (andesite, brass...)
