@@ -1,5 +1,6 @@
 package com.palm3.designdecor.register;
 
+import com.palm3.designdecor.content.blocks.supports.DiagonalMetalSupportBlock;
 import com.palm3.designdecor.content.blocks.supports.MetalSupport;
 import com.palm3.designdecor.content.blocks.supports.MetalSupportBlock;
 import com.palm3.designdecor.content.blocks.OrnateGrateBlock;
@@ -185,7 +186,7 @@ public class DnDBlocks {
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .register();
 
-    // Metal Support - DPM
+    // Metal Support
     public static final BlockEntry<MetalSupportBlock> METAL_SUPPORT = DND_REGISTRATE
             .block("metal_support", MetalSupportBlock::new)
             .initialProperties(SharedProperties::softMetal)
@@ -222,6 +223,36 @@ public class DnDBlocks {
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .item().model((c, p) -> p.blockItem(c::get, "/item")).build()
+            .register();
+
+    // Diagonal Metal Support - DPM
+    public static final BlockEntry<DiagonalMetalSupportBlock> DIAGONAL_METAL_SUPPORT = DND_REGISTRATE
+            .block("diagonal_metal_support", DiagonalMetalSupportBlock::new)
+            .initialProperties(SharedProperties::softMetal)
+            .properties(p -> p.mapColor(MapColor.COLOR_BLACK).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .blockstate((c, p) -> {
+                var block = p.models().withExistingParent("block/diagonal_metal_support/" + c.getName(), asDDResource("block/diagonal_metal_support/block"));
+                var item = p.models().withExistingParent("block/diagonal_metal_support/" + c.getName() + "_item", asDDResource("block/diagonal_metal_support/item"));
+
+                p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
+                    Direction dir = state.getValue(DiagonalMetalSupportBlock.HORIZONTAL_FACING);
+                    int yRot;
+                    switch (dir) {
+                        case EAST -> yRot = 90;
+                        case SOUTH -> yRot = 180;
+                        case WEST -> yRot = 270;
+                        default -> yRot = 0;
+                    }
+
+                    return ConfiguredModel.builder().modelFile(block).rotationY(yRot).build();
+                });
+            })
+            .recipe((c, p) -> {
+                p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.asItem()), RecipeCategory.BUILDING_BLOCKS, c, 2);
+                p.stonecutting(DataIngredient.tag(itemTag("dark_metal_decor")), RecipeCategory.BUILDING_BLOCKS, c, 2);
+            })
+            .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+            .item().model((c, p) -> p.blockItem(c::get, "/diagonal_metal_support_item")).build()
             .register();
 
     // Diagonal Girder Block - DPM
