@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "create:industrial_iron_block"
+  },
+  "result": "design_n_decor:metal_support"
+}
