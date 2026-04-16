@@ -1,10 +1,10 @@
 Here are the things currently ported in this repository, not on the mod releases
-(in caps are things not in the original 1.21.1 mods added by me):
+(in caps are things not in the original 1.21.1 mod added by me):
 
 - Deepslate tiles/red tiles
 - Ornate iron glass window/pane/grate (the casing thing)
 - Industrial plating
-- Large metal girder, beam, diagonal girder, metal support,
+- Large metal girder, beam, diagonal girder, metal support, diagonal metal support
 - Zinc bricks/checker tiles
 - Stone metal/colored stone metal
 - Velevet blocks
