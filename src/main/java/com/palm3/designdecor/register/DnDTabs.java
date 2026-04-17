@@ -18,6 +18,8 @@ public class DnDTabs {
                     .displayItems((params, output) -> {
                         DnDMain.DND_REGISTRATE.getAll(Registries.BLOCK)
                                 .forEach(entry -> output.accept(entry.get().asItem()));
+                        DnDMain.DND_REGISTRATE.getAll(Registries.ITEM)
+                                .forEach(entry -> output.accept(entry.get().asItem()));
                     })
                     .build()
             );
