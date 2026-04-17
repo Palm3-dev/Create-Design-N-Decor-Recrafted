@@ -1,0 +1,6 @@
+{
+  "parent": "design_n_decor:block/bolts/bolt_base_flat_135",
+  "textures": {
+    "0": "dndecor:block/copper_bolt"
+  }
+}

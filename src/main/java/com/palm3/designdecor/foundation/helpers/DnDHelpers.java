@@ -5,12 +5,14 @@
 */
 
 package com.palm3.designdecor.foundation.helpers;
-
+//todo revise this shis class
 import com.electronwill.nightconfig.core.conversion.InvalidValueException;
+import com.palm3.designdecor.content.blocks.bolts.Bolt;
+import com.palm3.designdecor.content.blocks.bolts.BoltBlock;
 import com.palm3.designdecor.content.blocks.frontlight.FrontlightBlock;
 import com.palm3.designdecor.content.blocks.sign_blocks.RotableSquareSignBlock;
-import com.palm3.designdecor.content.blocks.sign_blocks.SquareSignBlock;
 import com.palm3.designdecor.foundation.helpers.create_registrate.RegistrateBlockBuildingHelpers;
+import com.simibubi.create.AllTags;
 import com.simibubi.create.content.decoration.palettes.ConnectedPillarBlock;
 import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
 import com.simibubi.create.foundation.data.AssetLookup;
@@ -25,6 +27,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.MapColor;
@@ -47,12 +50,17 @@ import static com.palm3.designdecor.foundation.helpers.create_registrate.Registr
 import static com.palm3.designdecor.foundation.helpers.create_registrate.RegistrateDataGenTransformers.Generators.*;
 import static com.palm3.designdecor.content.blocks.frontlight.Frontlight.*;
 import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DDStoneBlockBuilders.*;  // this class
-import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DataGenTransformers.*;   // this class
+import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DDDataGenTransformers.*;   // this class
 import static com.simibubi.create.foundation.data.CreateRegistrate.connectedTextures;
 
 public class DnDHelpers {
 
-    public static class DataGenTransformers {
+    public static class DDDataGenTransformers {
+
+        /*
+        * BMRI = blockstate, model, item and recipe
+        * */
+
         @SafeVarargs
         /// Transformer that adds an item + tag(s) from DnD assets. See method declaration for details.
         public static <T extends Block, P> NonNullUnaryOperator<BlockBuilder<T, P>> stoneWallDDItemWithModel(@Nullable TagKey<Item>... tags) {
@@ -173,7 +181,90 @@ public class DnDHelpers {
                         })
                         .simpleItem();
         }
+
+        public enum BoltTypes implements StringRepresentable {
+            DASH("dash"),
+            CROSS("cross"),
+            FLAT("flat"),
+            DOT("dot");
+
+            private final String name;
+
+            BoltTypes(String name) {
+                this.name = name;
+            }
+
+            @Override
+            public String getSerializedName() {
+                return name;
+            }
+        }
+
+        /** @param material The item that gives the bolt in crafting. Should be ONLY an ingot.
+         * @param type The type of the bolt, can be: cross, dash, dot, flat         *
+         * @return BlockBuilder + blockstate, models, item and recipe.
+         */
+        protected static <T extends Block, P> NonNullUnaryOperator<BlockBuilder<BoltBlock, P>> boltDD_BMIR(String material, Supplier<Item> craftingItem, BoltTypes type) {
+            return b -> b.blockstate((c, p) -> {
+                var model0 = p.models().withExistingParent("block/bolts/" + c.getName() + "_0", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_0"))
+                        .texture("0", asDDResource("block/" + material + "_bolt"));
+                var model45 = p.models().withExistingParent("block/bolts/" + c.getName() + "_45", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_45"))
+                        .texture("0", asDDResource("block/" + material + "_bolt"));
+                var model135 = p.models().withExistingParent("block/bolts/" + c.getName() + "_135", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_135"))
+                        .texture("0", asDDResource("block/" + material + "_bolt"));
+
+                p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
+                    ModelFile model;
+                    Bolt rot = state.getValue(BoltBlock.BOLT_ROTATION);
+                    Direction facing = state.getValue(BoltBlock.FACING);
+
+                    switch (rot) {
+                        case DEG_0 -> model = model0;
+                        case DEG_45 -> model = model45;
+                        case DEG_135 -> model = model135;
+                        default -> throw new IllegalArgumentException("Bolt model rotation (from enum Bolt.class) cannot be: " + rot);
+                    }
+
+                    int yRot;
+                    int xRot;
+
+                    switch (facing) {
+                        case UP -> { yRot = 0; xRot = 0; }
+                        case DOWN -> { yRot = 0; xRot = 180; }
+                        case NORTH -> { yRot = 0; xRot = 90; }
+                        case SOUTH -> { yRot = 0; xRot = 270; }
+                        case WEST -> { yRot = 90; xRot = 270; }
+                        case EAST -> { yRot = 90; xRot = 90; }
+                        default -> throw new IllegalArgumentException("Bolt facing cannot be: " + facing);
+                    }
+
+                    return ConfiguredModel.builder().modelFile(model).rotationY(yRot).rotationX(xRot).build();
+                });
+            })
+            .item().model((c, p) -> {
+                String itemModelType;
+                if (c.getName().contains("_cross_")) itemModelType = "cross";
+                else if (c.getName().contains("_flat_")) itemModelType = "flat";
+                else if (c.getName().contains("_dot_")) itemModelType = "dot";
+                else if (c.getName().contains("_dash_")) itemModelType = "dash";
+                else throw new IllegalArgumentException("Block name cannot be: " + c.getName());
+
+                p.withExistingParent("item/" + c.getName(), asResource("item/bolts/" + itemModelType + "_bolt"))
+                        .texture("0", asDDResource("block/" + material + "_bolt"));
+            }).build()
+            .recipe((c, p) -> p.stonecutting(DataIngredient.items(craftingItem.get()), RecipeCategory.BUILDING_BLOCKS, c, 4));
+        }
     }
+
+
+    public static class DDBlockBuilders {
+        public static BlockBuilder<BoltBlock, CreateRegistrate> fullBoltBlockBuilder(String material, BoltTypes type, MapColor mapColor, Supplier<Item> stonecuttingWith) {
+            return basicClassBlock(BoltBlock::new, material + "_" + type.getSerializedName() + "_bolt", mapColor, SoundType.NETHERITE_BLOCK)
+                    .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
+                    .transform(DDDataGenTransformers.boltDD_BMIR(material, stonecuttingWith, type));
+        }
+    }
+
 
     public static class DDStoneBlockBuilders {
         /* This category only works on this mod, or on mods that use the Design 'N' Decor assets, since those methods search in the DnD assets directory
@@ -219,7 +310,7 @@ public class DnDHelpers {
         /// Returns the basic BlockBuilder for a stone-type ConnectedPillarBlock with given name and properties (recipe: stonecutting the tag stone_types/name).
         public static BlockBuilder<ConnectedPillarBlock, CreateRegistrate> simpleDDStonePillarBlock(String nameWithout_pillar, MapColor mapColor, SoundType sound, String generalPathInBlockDir, String textureAcceptsPath, String topTextureAcceptsPath, String stoneItemTag) {
             return simpleConnectedPillar(nameWithout_pillar, true, mapColor, sound, generalPathInBlockDir, textureAcceptsPath, topTextureAcceptsPath)
-                    .transform(DataGenTransformers.blockDDParent_BMI(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))))
+                    .transform(DDDataGenTransformers.blockDDParent_BMI(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))))
                     .recipe((c, p) -> {
                         p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                     });
@@ -234,7 +325,7 @@ public class DnDHelpers {
                     .properties(p -> p.requiresCorrectToolForDrops().sound(sound).mapColor(mapColor))
                     .loot((t, g) -> t.dropSelf(g))
                     .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE)
-                    .transform(DataGenTransformers.blockDDParent_BMI(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))))
+                    .transform(DDDataGenTransformers.blockDDParent_BMI(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))))
                     .recipe((c, p) -> {
                         p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource("stone_types/" + stoneItemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
                     });
@@ -247,8 +338,8 @@ public class DnDHelpers {
     public static final Map<String, BlockEntry<StairBlock>> STAIRS_MAP = new HashMap<>();
     public static final Map<String, BlockEntry<WallBlock>> WALLS_MAP = new HashMap<>();
     public static final Map<String, BlockEntry<ConnectedPillarBlock>> PILLARS_MAP = new HashMap<>();
-    public static final Map<String, BlockEntry<SquareSignBlock>> SIGNS_MAP = new HashMap<>();
     public static final Map<String, BlockEntry<RotableSquareSignBlock>> ROTABLE_SIGNS_MAP = new HashMap<>();
+    public static final Map<String, BlockEntry<BoltBlock>> BOLTS_MAP = new HashMap<>();
 
 
     /// Registers a full stone block set (blocks, slabs, stairs, walls, pillar, layered) in cut, brick and polished version.
@@ -314,4 +405,12 @@ public class DnDHelpers {
 
     /// @return DD stone_types location + given path
     public static String toStonesDir(String path) { return "block/palettes/stone_types/" + path; }
+
+    /// Registers 4 bolts: DASH, DOT, CROSS, FLAT. Naming scheme: material + _bolt + _type (DASH...)
+    public static void registerBoltSet(String material, MapColor mapColor, Supplier<Item> stonecuttingWith) {
+        BOLTS_MAP.put(material + "_cross_bolt", DDBlockBuilders.fullBoltBlockBuilder(material, BoltTypes.CROSS, mapColor, stonecuttingWith).register());
+        BOLTS_MAP.put(material + "_dash_bolt", DDBlockBuilders.fullBoltBlockBuilder(material, BoltTypes.DASH, mapColor, stonecuttingWith).register());
+        BOLTS_MAP.put(material + "_dot_bolt", DDBlockBuilders.fullBoltBlockBuilder(material, BoltTypes.DOT, mapColor, stonecuttingWith).register());
+        BOLTS_MAP.put(material + "_flat_bolt", DDBlockBuilders.fullBoltBlockBuilder(material, BoltTypes.FLAT, mapColor, stonecuttingWith).register());
+    }
 }

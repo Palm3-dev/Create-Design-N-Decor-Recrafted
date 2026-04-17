@@ -13,3 +13,4 @@ Here are the things currently ported in this repository, not on the mod releases
 - Metals floors (andesite, brass...)
 - All stone block set variants (pillar, bricks, slabs...)
 - SIGNS
+- Bolts

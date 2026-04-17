@@ -1,0 +1,6 @@
+{
+  "parent": "design_n_decor:item/bolts/cross_bolt",
+  "textures": {
+    "0": "dndecor:block/netherite_bolt"
+  }
+}

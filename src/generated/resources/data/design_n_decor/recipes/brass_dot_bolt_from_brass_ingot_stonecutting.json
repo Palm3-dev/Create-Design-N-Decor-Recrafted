@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "create:brass_ingot"
+  },
+  "result": "design_n_decor:brass_dot_bolt"
+}

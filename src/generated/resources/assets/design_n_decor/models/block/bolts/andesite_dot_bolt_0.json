@@ -1,0 +1,6 @@
+{
+  "parent": "design_n_decor:block/bolts/bolt_base_dot_0",
+  "textures": {
+    "0": "dndecor:block/andesite_bolt"
+  }
+}

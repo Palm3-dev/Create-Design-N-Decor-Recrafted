@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:gold_ingot"
+  },
+  "result": "design_n_decor:gold_cross_bolt"
+}

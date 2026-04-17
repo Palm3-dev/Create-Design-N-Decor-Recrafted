@@ -1,0 +1,6 @@
+{
+  "parent": "design_n_decor:item/bolts/dot_bolt",
+  "textures": {
+    "0": "dndecor:block/iron_bolt"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "design_n_decor:industrial_iron_ingot"
+  },
+  "result": "design_n_decor:industrial_dot_bolt"
+}

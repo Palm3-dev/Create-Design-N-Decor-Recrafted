@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "design_n_decor:item/industrial_iron_ingot"
+  }
+}

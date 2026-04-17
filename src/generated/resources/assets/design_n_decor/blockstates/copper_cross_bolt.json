@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "bolt_rotation=deg_0,facing=down": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0",
+      "x": 180
+    },
+    "bolt_rotation=deg_0,facing=east": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_0,facing=north": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0",
+      "x": 90
+    },
+    "bolt_rotation=deg_0,facing=south": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0",
+      "x": 270
+    },
+    "bolt_rotation=deg_0,facing=up": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0"
+    },
+    "bolt_rotation=deg_0,facing=west": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_0",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_135,facing=down": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135",
+      "x": 180
+    },
+    "bolt_rotation=deg_135,facing=east": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_135,facing=north": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135",
+      "x": 90
+    },
+    "bolt_rotation=deg_135,facing=south": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135",
+      "x": 270
+    },
+    "bolt_rotation=deg_135,facing=up": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135"
+    },
+    "bolt_rotation=deg_135,facing=west": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_135",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_45,facing=down": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45",
+      "x": 180
+    },
+    "bolt_rotation=deg_45,facing=east": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_45,facing=north": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45",
+      "x": 90
+    },
+    "bolt_rotation=deg_45,facing=south": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45",
+      "x": 270
+    },
+    "bolt_rotation=deg_45,facing=up": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45"
+    },
+    "bolt_rotation=deg_45,facing=west": {
+      "model": "design_n_decor:block/bolts/copper_cross_bolt_45",
+      "x": 270,
+      "y": 90
+    }
+  }
+}

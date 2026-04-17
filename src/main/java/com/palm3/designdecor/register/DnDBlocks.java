@@ -10,7 +10,6 @@ import com.palm3.designdecor.content.blocks.diagonal_girder.DiagonalGirderBlock;
 import com.palm3.designdecor.content.blocks.beam.BeamBlock;
 import com.palm3.designdecor.content.blocks.beam.BeamCTBehaviour;
 import com.palm3.designdecor.content.blocks.frontlight.FrontlightBlock;
-import com.palm3.designdecor.foundation.helpers.DnDHelpers;
 import com.simibubi.create.*;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.content.decoration.encasing.EncasedCTBehaviour;
@@ -39,7 +38,7 @@ import net.minecraftforge.common.Tags;
 
 import static com.palm3.designdecor.DnDMain.*;
 import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DDStoneBlockBuilders.simpleDDStoneBlock;
-import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DataGenTransformers.*;
+import static com.palm3.designdecor.foundation.helpers.DnDHelpers.DDDataGenTransformers.*;
 
 import static com.palm3.designdecor.foundation.helpers.create_registrate.CTSpriteShiftsHelpers.*;
 
@@ -136,7 +135,7 @@ public class DnDBlocks {
 
     // Large Metal Girder - DPM
     public static final BlockEntry<ConnectedPillarBlock> LARGE_METAL_GIRDER = simpleConnectedPillar("large_metal_girder", false, MapColor.COLOR_GRAY, SoundType.NETHERITE_BLOCK, "large_girder", "large_girder_top")
-            .transform(DnDHelpers.DataGenTransformers.blockDDParent_BMI())  // MAYBE, but MAYBE, fix with blockBMI (conn. texture not working)
+            .transform(DDDataGenTransformers.blockDDParent_BMI())  // MAYBE, but MAYBE, fix with blockBMI (conn. texture not working)
             .blockstate((c, p) -> {
                 p.models().withExistingParent(c.getName(), asDDResource(c.getName()));
                 p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c ,p));
@@ -692,6 +691,49 @@ public class DnDBlocks {
             })
             .register();
 
+    // Bolts
+    /*public static final BlockEntry<BoltBlock> BRASS_BOLT_CROSS_TESTSSSS = DND_REGISTRATE
+            .block("brass_bolt_cross_test", BoltBlock::new)
+            .blockstate((c, p) -> {
+                var model0 = p.models().withExistingParent("block/bolts/" + c.getName() + "_0", asResource("block/bolts/bolt_base_cross_0"))
+                        .texture("0", asDDResource("block/brass_bolt"));
+                var model45 = p.models().withExistingParent("block/bolts/" + c.getName() + "_45", asResource("block/bolts/bolt_base_cross_45"))
+                        .texture("0", asDDResource("block/brass_bolt"));
+                var model135 = p.models().withExistingParent("block/bolts/" + c.getName() + "_135", asResource("block/bolts/bolt_base_cross_135"))
+                        .texture("0", asDDResource("block/brass_bolt"));
+                var item = p.models().withExistingParent("block/bolts/" + c.getName() + "_item", asResource("block/bolts/bolt_base_cross_0"))
+                        .texture("0", asDDResource("block/brass_bolt"));
+                p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
+                    ModelFile model;
+                    Bolt rot = state.getValue(BoltBlock.BOLT_ROTATION);
+                    Direction facing = state.getValue(BoltBlock.FACING);
+
+                    switch (rot) {
+                        case DEG_0 -> model = model0;
+                        case DEG_45 -> model = model45;
+                        case DEG_135 -> model = model135;
+                        default -> throw new IllegalArgumentException("Bolt model rotation (from enum Bolt.class) cannot be: " + rot);
+                    }
+
+                    int yRot;
+                    int xRot;
+
+                    switch (facing) {
+                        case UP -> { yRot = 0; xRot = 0; }
+                        case DOWN -> { yRot = 0; xRot = 180; }
+                        case NORTH -> { yRot = 0; xRot = 90; }
+                        case SOUTH -> { yRot = 0; xRot = 270; }
+                        case WEST -> { yRot = 90; xRot = 270; }
+                        case EAST -> { yRot = 90; xRot = 90; }
+                        default -> throw new IllegalArgumentException("Bolt facing cannot be: " + facing);
+                    }
+
+                    return ConfiguredModel.builder().modelFile(model).rotationY(yRot).rotationX(xRot).build();
+                });
+            })
+            .item().model((c, p) -> p.withExistingParent(c.getName(), asResource("block/bolts/bolt_base_cross_0")).texture("0", asDDResource("block/brass_bolt"))).build()
+            .register();*/
+
     // Brass Floor
     public static final BlockEntry<Block> BRASS_FLOOR = simpleBlock("brass_floor",MapColor.TERRACOTTA_YELLOW, SoundType.METAL)
             .recipe((c, p) ->
@@ -768,49 +810,59 @@ public class DnDBlocks {
         registerStoneBlockSet("dolomite", MapColor.COLOR_LIGHT_GRAY, SoundType.STONE);
 
         registerNumberAndLetterSignSet();
+
+        // Blank Symbol Sign - DPM
+        final BlockEntry<RotableSquareSignBlock> BLANK_SYMBOL_SIGN = rotableSquareSignBlock("blank_symbol", asDDResource("block/old/letter_signs/blank"), null, "brass")
+                .blockstate((c, p) -> {
+                    String fileTextureName = c.getName().substring(0, c.getName().length() - 12);
+
+                    var model0 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_0", asResource("block/base/signs/sign_model_0"))
+                            .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
+                    var model90 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_90", asResource("block/base/signs/sign_model_90"))
+                            .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
+                    var model180 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_180", asResource("block/base/signs/sign_model_180"))
+                            .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
+                    var model270 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_270", asResource("block/base/signs/sign_model_270"))
+                            .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
+
+                    p.getVariantBuilder(c.get()).forAllStates(state -> {
+                        Direction dir = state.getValue(SquareSignBlock.FACING);
+                        var axisDir = state.getValue(RotableSquareSignBlock.AXIS_ROT);
+                        ModelFile model = model0;  // Fallback
+
+                        switch (axisDir) {
+                            case ROT0 -> model = model0;
+                            case ROT90 -> model = model90;
+                            case ROT180 -> model = model180;
+                            case ROT270 -> model = model270;
+                        }
+
+                        int yRot = 0;
+                        int xRot = 0;
+                        switch (dir) {
+                            case UP -> xRot = 270;
+                            case DOWN -> xRot = 90;
+                            case NORTH -> yRot = 0;
+                            case SOUTH -> yRot = 180;
+                            case EAST -> yRot = 90;
+                            case WEST -> yRot = 270;
+                        }
+
+                        return ConfiguredModel.builder().modelFile(model).rotationY(yRot).rotationX(xRot).build();
+                    });
+                })
+                .register();
+
+        registerBoltSet("brass", MapColor.TERRACOTTA_YELLOW, AllItems.BRASS_INGOT::asItem);
+        registerBoltSet("andesite", MapColor.TERRACOTTA_YELLOW, AllItems.ANDESITE_ALLOY::asItem);
+        registerBoltSet("zinc", MapColor.TERRACOTTA_YELLOW, AllItems.ZINC_INGOT::asItem);
+        registerBoltSet("copper", MapColor.TERRACOTTA_YELLOW, Items.COPPER_INGOT::asItem);
+        registerBoltSet("industrial", MapColor.TERRACOTTA_YELLOW, DnDItems.INDUSTRIAL_IRON_INGOT::asItem);
+        registerBoltSet("gold", MapColor.TERRACOTTA_YELLOW, Items.GOLD_INGOT::asItem);
+        registerBoltSet("iron", MapColor.TERRACOTTA_YELLOW, Items.IRON_INGOT::asItem);
+        registerBoltSet("netherite", MapColor.TERRACOTTA_YELLOW, Items.NETHERITE_INGOT::asItem);
     }
 
-    // Even more signs - DPM
-    public static final BlockEntry<RotableSquareSignBlock> BLANK_SYMBOL_SIGN = rotableSquareSignBlock("blank_symbol", asDDResource("block/old/letter_signs/blank"), null, "brass")
-            .blockstate((c, p) -> {
-                String fileTextureName = c.getName().substring(0, c.getName().length() - 12);
-
-                var model0 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_0", asResource("block/base/signs/sign_model_0"))
-                        .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
-                var model90 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_90", asResource("block/base/signs/sign_model_90"))
-                        .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
-                var model180 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_180", asResource("block/base/signs/sign_model_180"))
-                        .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
-                var model270 = p.models().withExistingParent("block/signs/symbol_signs/" + c.getName() + "_270", asResource("block/base/signs/sign_model_270"))
-                        .texture("0", asDDResource("block/old/letter_signs/" + fileTextureName));
-
-                p.getVariantBuilder(c.get()).forAllStates(state -> {
-                    Direction dir = state.getValue(SquareSignBlock.FACING);
-                    var axisDir = state.getValue(RotableSquareSignBlock.AXIS_ROT);
-                    ModelFile model = model0;  // Fallback
-
-                    switch (axisDir) {
-                        case ROT0 -> model = model0;
-                        case ROT90 -> model = model90;
-                        case ROT180 -> model = model180;
-                        case ROT270 -> model = model270;
-                    }
-
-                    int yRot = 0;
-                    int xRot = 0;
-                    switch (dir) {
-                        case UP -> xRot = 270;
-                        case DOWN -> xRot = 90;
-                        case NORTH -> yRot = 0;
-                        case SOUTH -> yRot = 180;
-                        case EAST -> yRot = 90;
-                        case WEST -> yRot = 270;
-                    }
-
-                    return ConfiguredModel.builder().modelFile(model).rotationY(yRot).rotationX(xRot).build();
-                });
-            })
-            .register();
 
     // Rotable cause, why not?
     public static final BlockEntry<RotableSquareSignBlock> UP_SIGN = rotableSquareSignBlock("up", asDDResource(signPathPlusName("up")), null, null).transform(rotableSquareSignBM(ORIGINAL_MOD_ID, signPath())).register();
