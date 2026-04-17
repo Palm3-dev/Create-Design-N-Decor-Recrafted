@@ -20,6 +20,7 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.DataIngredient;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
@@ -30,11 +31,13 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static com.palm3.designdecor.DnDMain.*;
@@ -116,6 +119,29 @@ public class RegistrateBlockBuildingHelpers {
 
 
     public static class BlockBuilders {
+        /* ****************** GENERAL BLOCK ****************** */
+
+        /**
+         * @param factory The type of block, es. Block::new
+         * @param name The name of the block.
+         * @param mapColor Map color of the block. If null default is GRAY.
+         * @param soundType Sound type of the block. If null default is WOOD.
+         * @return Basic BlockBuilder for the given block 'factory'
+         */
+        public static <B extends Block> BlockBuilder<B, CreateRegistrate> basicClassBlock(NonNullFunction<BlockBehaviour.Properties, B> factory, String name, @Nullable MapColor mapColor, @Nullable SoundType soundType) {
+            return getRegistrate()
+                    .block(name, factory)
+                    .initialProperties(SharedProperties::softMetal)
+                    .properties(p -> {
+                        p.requiresCorrectToolForDrops();
+                        p.mapColor(Objects.requireNonNullElse(mapColor, MapColor.COLOR_GRAY));
+                        p.sound(Objects.requireNonNullElse(soundType, SoundType.WOOD));
+                        return p;
+                    })
+                    .loot(RegistrateBlockLootTables::dropSelf)
+                    .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE);
+        }
+
         /* ****************** CASING ****************** */
         /**
          * @param nameOrMaterial The name of the block.
