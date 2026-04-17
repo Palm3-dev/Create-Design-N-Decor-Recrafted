@@ -313,8 +313,7 @@ public class RegistrateBlockBuildingHelpers {
                     .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.SIGNS)
                     .item().model((c, p) -> p.generated(c, itemModelTexture)).tag(ItemUtils.customTagOrDefault("square_signs", itemTag)).build()
                     .recipe((c, p) -> {
-                        if (itemTag != null)
-                            p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asResource(itemTag))), RecipeCategory.BUILDING_BLOCKS, c, 1);
+                        p.stonecutting(DataIngredient.tag(ItemUtils.customTagOrDefault("square_signs", itemTag)), RecipeCategory.BUILDING_BLOCKS, c, 1);
                         if (forgeIngotTagForRecipe != null)
                             p.stonecutting(DataIngredient.tag(TagKey.create(Registries.ITEM, asNamespaceResource("forge", "ingots/" + forgeIngotTagForRecipe))), RecipeCategory.BUILDING_BLOCKS, c, 2);
                     });

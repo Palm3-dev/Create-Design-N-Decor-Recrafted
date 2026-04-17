@@ -691,49 +691,6 @@ public class DnDBlocks {
             })
             .register();
 
-    // Bolts
-    /*public static final BlockEntry<BoltBlock> BRASS_BOLT_CROSS_TESTSSSS = DND_REGISTRATE
-            .block("brass_bolt_cross_test", BoltBlock::new)
-            .blockstate((c, p) -> {
-                var model0 = p.models().withExistingParent("block/bolts/" + c.getName() + "_0", asResource("block/bolts/bolt_base_cross_0"))
-                        .texture("0", asDDResource("block/brass_bolt"));
-                var model45 = p.models().withExistingParent("block/bolts/" + c.getName() + "_45", asResource("block/bolts/bolt_base_cross_45"))
-                        .texture("0", asDDResource("block/brass_bolt"));
-                var model135 = p.models().withExistingParent("block/bolts/" + c.getName() + "_135", asResource("block/bolts/bolt_base_cross_135"))
-                        .texture("0", asDDResource("block/brass_bolt"));
-                var item = p.models().withExistingParent("block/bolts/" + c.getName() + "_item", asResource("block/bolts/bolt_base_cross_0"))
-                        .texture("0", asDDResource("block/brass_bolt"));
-                p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
-                    ModelFile model;
-                    Bolt rot = state.getValue(BoltBlock.BOLT_ROTATION);
-                    Direction facing = state.getValue(BoltBlock.FACING);
-
-                    switch (rot) {
-                        case DEG_0 -> model = model0;
-                        case DEG_45 -> model = model45;
-                        case DEG_135 -> model = model135;
-                        default -> throw new IllegalArgumentException("Bolt model rotation (from enum Bolt.class) cannot be: " + rot);
-                    }
-
-                    int yRot;
-                    int xRot;
-
-                    switch (facing) {
-                        case UP -> { yRot = 0; xRot = 0; }
-                        case DOWN -> { yRot = 0; xRot = 180; }
-                        case NORTH -> { yRot = 0; xRot = 90; }
-                        case SOUTH -> { yRot = 0; xRot = 270; }
-                        case WEST -> { yRot = 90; xRot = 270; }
-                        case EAST -> { yRot = 90; xRot = 90; }
-                        default -> throw new IllegalArgumentException("Bolt facing cannot be: " + facing);
-                    }
-
-                    return ConfiguredModel.builder().modelFile(model).rotationY(yRot).rotationX(xRot).build();
-                });
-            })
-            .item().model((c, p) -> p.withExistingParent(c.getName(), asResource("block/bolts/bolt_base_cross_0")).texture("0", asDDResource("block/brass_bolt"))).build()
-            .register();*/
-
     // Brass Floor
     public static final BlockEntry<Block> BRASS_FLOOR = simpleBlock("brass_floor",MapColor.TERRACOTTA_YELLOW, SoundType.METAL)
             .recipe((c, p) ->
