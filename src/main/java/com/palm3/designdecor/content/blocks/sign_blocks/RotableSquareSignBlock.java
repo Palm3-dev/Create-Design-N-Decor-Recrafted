@@ -29,50 +29,30 @@ import java.util.Map;
 import static com.palm3.designdecor.content.blocks.sign_blocks.RotableSquareSign.*;
 
 @SuppressWarnings("deprecated")
-public class RotableSquareSignBlock extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.FACING;
+public class RotableSquareSignBlock extends SquareSignBlock {
     public static final EnumProperty<RotableSquareSign> AXIS_ROT = EnumProperty.create("axis_rot", RotableSquareSign.class);
 
     public RotableSquareSignBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState()
-                .setValue(FACING, Direction.NORTH)
-                .setValue(AXIS_ROT, ROT0));
+        this.registerDefaultState(this.defaultBlockState().setValue(AXIS_ROT, ROT0));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, AXIS_ROT);
-    }
-
-    //------------------- Shape -------------------
-    public static final VoxelShape SHAPE_UP = RotableSquareSignBlock.box(1, 0,1,15, 1, 15);
-    public static final VoxelShape SHAPE_DOWN = RotableSquareSignBlock.box(1, 15, 1, 15, 16 ,15);
-    public static final VoxelShape SHAPE_SOUTH = RotableSquareSignBlock.box(1, 1, 0, 15, 15, 1);
-    public static final VoxelShape SHAPE_NORTH = RotableSquareSignBlock.box(1, 1, 15, 15, 15, 16);
-    public static final VoxelShape SHAPE_EAST = RotableSquareSignBlock.box(0, 1, 1, 1, 15, 15);
-    public static final VoxelShape SHAPE_WEST = RotableSquareSignBlock.box(15, 1, 1, 16, 15, 15);
-
-    private static final Map<Direction, VoxelShape> SHAPES = Map.of(
-            Direction.UP, SHAPE_UP,
-            Direction.DOWN, SHAPE_DOWN,
-            Direction.NORTH, SHAPE_NORTH,
-            Direction.SOUTH, SHAPE_SOUTH,
-            Direction.EAST, SHAPE_EAST,
-            Direction.WEST, SHAPE_WEST
-    );
-
-    @ParametersAreNonnullByDefault
-    @NotNull
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPES.getOrDefault(state.getValue(FACING), SHAPE_UP);
+        super.createBlockStateDefinition(builder);
+        builder.add(AXIS_ROT);
     }
     
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState()
-                .setValue(FACING, context.getClickedFace())
-                .setValue(AXIS_ROT, ROT0);
+        BlockState state = super.getStateForPlacement(context);
+        RotableSquareSign placeRot = switch (context.getHorizontalDirection()) {
+            case UP, DOWN, SOUTH -> ROT0;
+            case NORTH -> ROT180;
+            case WEST -> ROT90;
+            case EAST -> ROT270;
+        };
+        return state.setValue(AXIS_ROT, placeRot);
     }
 
     @Override
@@ -90,7 +70,8 @@ public class RotableSquareSignBlock extends Block {
                 }
                 level.playSound(null, pos, AllSoundEvents.WRENCH_ROTATE.getMainEvent(), SoundSource.BLOCKS, 0.5f, 1.6f);
             }
-        }
-        return InteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
+        } else return InteractionResult.PASS;
+
     }
 }

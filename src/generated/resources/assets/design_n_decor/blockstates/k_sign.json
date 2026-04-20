@@ -1,94 +1,186 @@
 {
   "variants": {
-    "axis_rot=rot0,facing=down": {
+    "axis_rot=rot0,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0",
       "x": 90
     },
-    "axis_rot=rot0,facing=east": {
+    "axis_rot=rot0,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0",
+      "x": 90
+    },
+    "axis_rot=rot0,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0",
       "y": 90
     },
-    "axis_rot=rot0,facing=north": {
+    "axis_rot=rot0,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0",
+      "y": 90
+    },
+    "axis_rot=rot0,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0"
     },
-    "axis_rot=rot0,facing=south": {
+    "axis_rot=rot0,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0"
+    },
+    "axis_rot=rot0,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0",
       "y": 180
     },
-    "axis_rot=rot0,facing=up": {
+    "axis_rot=rot0,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0",
+      "y": 180
+    },
+    "axis_rot=rot0,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0",
       "x": 270
     },
-    "axis_rot=rot0,facing=west": {
+    "axis_rot=rot0,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0",
+      "x": 270
+    },
+    "axis_rot=rot0,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_0",
       "y": 270
     },
-    "axis_rot=rot180,facing=down": {
+    "axis_rot=rot0,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_0",
+      "y": 270
+    },
+    "axis_rot=rot180,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180",
       "x": 90
     },
-    "axis_rot=rot180,facing=east": {
+    "axis_rot=rot180,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180",
+      "x": 90
+    },
+    "axis_rot=rot180,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180",
       "y": 90
     },
-    "axis_rot=rot180,facing=north": {
+    "axis_rot=rot180,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180",
+      "y": 90
+    },
+    "axis_rot=rot180,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180"
     },
-    "axis_rot=rot180,facing=south": {
+    "axis_rot=rot180,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180"
+    },
+    "axis_rot=rot180,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180",
       "y": 180
     },
-    "axis_rot=rot180,facing=up": {
+    "axis_rot=rot180,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180",
+      "y": 180
+    },
+    "axis_rot=rot180,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180",
       "x": 270
     },
-    "axis_rot=rot180,facing=west": {
+    "axis_rot=rot180,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180",
+      "x": 270
+    },
+    "axis_rot=rot180,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_180",
       "y": 270
     },
-    "axis_rot=rot270,facing=down": {
+    "axis_rot=rot180,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_180",
+      "y": 270
+    },
+    "axis_rot=rot270,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270",
       "x": 90
     },
-    "axis_rot=rot270,facing=east": {
+    "axis_rot=rot270,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270",
+      "x": 90
+    },
+    "axis_rot=rot270,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270",
       "y": 90
     },
-    "axis_rot=rot270,facing=north": {
+    "axis_rot=rot270,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270",
+      "y": 90
+    },
+    "axis_rot=rot270,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270"
     },
-    "axis_rot=rot270,facing=south": {
+    "axis_rot=rot270,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270"
+    },
+    "axis_rot=rot270,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270",
       "y": 180
     },
-    "axis_rot=rot270,facing=up": {
+    "axis_rot=rot270,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270",
+      "y": 180
+    },
+    "axis_rot=rot270,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270",
       "x": 270
     },
-    "axis_rot=rot270,facing=west": {
+    "axis_rot=rot270,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270",
+      "x": 270
+    },
+    "axis_rot=rot270,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_270",
       "y": 270
     },
-    "axis_rot=rot90,facing=down": {
+    "axis_rot=rot270,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_270",
+      "y": 270
+    },
+    "axis_rot=rot90,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90",
       "x": 90
     },
-    "axis_rot=rot90,facing=east": {
+    "axis_rot=rot90,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90",
+      "x": 90
+    },
+    "axis_rot=rot90,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90",
       "y": 90
     },
-    "axis_rot=rot90,facing=north": {
+    "axis_rot=rot90,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90",
+      "y": 90
+    },
+    "axis_rot=rot90,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90"
     },
-    "axis_rot=rot90,facing=south": {
+    "axis_rot=rot90,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90"
+    },
+    "axis_rot=rot90,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90",
       "y": 180
     },
-    "axis_rot=rot90,facing=up": {
+    "axis_rot=rot90,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90",
+      "y": 180
+    },
+    "axis_rot=rot90,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90",
       "x": 270
     },
-    "axis_rot=rot90,facing=west": {
+    "axis_rot=rot90,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90",
+      "x": 270
+    },
+    "axis_rot=rot90,facing=west,waterlogged=false": {
+      "model": "design_n_decor:block/signs/rotable/k_sign_90",
+      "y": 270
+    },
+    "axis_rot=rot90,facing=west,waterlogged=true": {
       "model": "design_n_decor:block/signs/rotable/k_sign_90",
       "y": 270
     }
