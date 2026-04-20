@@ -1,13 +1,12 @@
 package com.palm3.designdecor.content.blocks.supports;
 
-import com.palm3.designdecor.DnDMain;
 import com.palm3.designdecor.content.blocks.sign_blocks.SquareSignBlock;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -15,46 +14,52 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import static com.palm3.designdecor.content.blocks.supports.MetalSupport.*;
 
 @SuppressWarnings({"deprecated"})
-public class MetalSupportBlock extends Block {
+public class MetalSupportBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final EnumProperty<Direction.Axis> HORIZONTAL_AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final EnumProperty<MetalSupport> BLOCK_TYPE = EnumProperty.create("block_type", MetalSupport.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public MetalSupportBlock(BlockBehaviour.Properties props) {
         super(props);
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(BLOCK_TYPE, TOP_BOTTOM)
-                .setValue(HORIZONTAL_AXIS, Direction.Axis.X));
+                .setValue(HORIZONTAL_AXIS, Direction.Axis.X)
+                .setValue(WATERLOGGED, false));
     }
 
+    @ParametersAreNonnullByDefault
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BLOCK_TYPE, HORIZONTAL_AXIS);
+        builder.add(BLOCK_TYPE, HORIZONTAL_AXIS, WATERLOGGED);
     }
 
     // Shape
     public static final VoxelShape SHAPE_POLE = SquareSignBlock.box(4, 0,4,12, 16, 12);
     public static final VoxelShape SHAPE_UP_PIECE_X = SquareSignBlock.box(0, 13, 4, 16, 16 ,12);
     public static final VoxelShape SHAPE_UP_PIECE_Z = SquareSignBlock.box(4, 13, 0, 12, 16 ,16);
-    public static final VoxelShape SHAPE_T_X = Shapes.or(SHAPE_POLE, SHAPE_UP_PIECE_X);
-    public static final VoxelShape SHAPE_T_Z = Shapes.or(SHAPE_POLE, SHAPE_UP_PIECE_Z);
+    public static final VoxelShape SHAPE_T_X = Shapes.or(SHAPE_POLE, SHAPE_UP_PIECE_X);  // T shape with X axis
+    public static final VoxelShape SHAPE_T_Z = Shapes.or(SHAPE_POLE, SHAPE_UP_PIECE_Z);  // T shape with Z axis
 
 
 
@@ -71,47 +76,62 @@ public class MetalSupportBlock extends Block {
         }
     }
 
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState()
-                .setValue(BLOCK_TYPE, TOP_BOTTOM)
-                .setValue(HORIZONTAL_AXIS, context.getHorizontalDirection().getAxis());
-    }
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        boolean isWaterlogged = fluidstate.getType() == Fluids.WATER;
 
-    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        super.onPlace(state, level, pos, oldState, movedByPiston);
+        MetalSupport finalType = TOP_BOTTOM;
+        BlockState aboveState = context.getLevel().getBlockState(context.getClickedPos().above());
+        BlockState belowState = context.getLevel().getBlockState(context.getClickedPos().below());
 
-        if (level.getBlockState(pos.below()).is(this.asBlock())) {
-            MetalSupport belowBlockType = level.getBlockState(pos.below()).getValue(BLOCK_TYPE);
+        if (belowState.is(this.asBlock()) && !aboveState.is(this.asBlock())) {  // Below THIS - above OTHER
+            MetalSupport belowBlockType = belowState.getValue(BLOCK_TYPE);
             boolean belowIsValid = belowBlockType.equals(TOP) || belowBlockType.equals(TOP_BOTTOM);
+            if (belowIsValid)
+                finalType = TOP;
 
-            if (belowIsValid) level.setBlock(pos, state.setValue(BLOCK_TYPE, TOP), 3);  // Becomes TOP
+        } else if (!belowState.is(this.asBlock()) && aboveState.is(this.asBlock())) {  // Below OTHER - above THIS
+            MetalSupport aboveBlockType = aboveState.getValue(BLOCK_TYPE);
+            boolean aboveIsValid = aboveBlockType.equals(BOTTOM) || aboveBlockType.equals(TOP_BOTTOM);
+            if (aboveIsValid)
+                finalType = BOTTOM;
+
+        } else if (aboveState.is(this.asBlock()) && belowState.is(this.asBlock())) {  // Below THIS - above THIS
+            finalType = MIDDLE;
         }
+
+        return defaultBlockState()
+                .setValue(BLOCK_TYPE, finalType)
+                .setValue(HORIZONTAL_AXIS, context.getHorizontalDirection().getAxis())
+                .setValue(WATERLOGGED, isWaterlogged);
     }
 
+    @ParametersAreNonnullByDefault
     public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
-
         BlockState aboveState = level.getBlockState(pos.above());
         BlockState belowState = level.getBlockState(pos.below());
 
-        if (aboveState.isAir() && belowState.is(this.asBlock())) {  // Up AIR - down THIS block
-            if (belowState.getValue(BLOCK_TYPE).equals(BOTTOM) || belowState.getValue(BLOCK_TYPE).equals(MIDDLE)) {  // If below is BOTTOM or MIDDLE sets to TOP
-                level.setBlock(pos, state.setValue(BLOCK_TYPE, TOP), 3);
-            }
-        } else if (aboveState.isAir() && !belowState.is(this.asBlock())) {  // Up AIR - down NOT THIS block
-            level.setBlock(pos, state.setValue(BLOCK_TYPE, TOP_BOTTOM), 3);  // Sets THIS to TOP_BOTTOM
-        } else if (aboveState.is(this.asBlock()) && belowState.is(this.asBlock())) {  // Up THIS - down THIS block
-            level.setBlock(pos, state.setValue(BLOCK_TYPE, MIDDLE), 3);  // Sets THIS to MIDDLE
-        } else if (aboveState.is(this.asBlock()) && !belowState.is(this.asBlock())) {  // Up THIS - down NOT THIS block
-            level.setBlock(pos, state.setValue(BLOCK_TYPE, BOTTOM), 3);
+        if (!belowState.is(this.asBlock()) && !aboveState.is(this.asBlock())) {  // Below OTHER - above OTHER
+            level.setBlock(pos, state.setValue(BLOCK_TYPE, TOP_BOTTOM), 3);  // Becomes TOP_BOTTOM
+
+        } else if (belowState.is(this.asBlock()) && !aboveState.is(this.asBlock())) {  // Below THIS - above OTHER
+            level.setBlock(pos, state.setValue(BLOCK_TYPE, TOP), 3);  // Becomes TOP
+
+        } else if (!belowState.is(this.asBlock()) && aboveState.is(this.asBlock())) {  // Below OTHER - above THIS
+            level.setBlock(pos, state.setValue(BLOCK_TYPE, BOTTOM), 3);  // Becomes BOTTOM
+
+        } else if (belowState.is(this.asBlock()) && aboveState.is(this.asBlock())) {  // Below THIS - above THIS
+            level.setBlock(pos, state.setValue(BLOCK_TYPE, MIDDLE), 3);  // Becomes MIDDLE
         }
     }
 
     @Override
+    @ParametersAreNonnullByDefault
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack item = player.getItemInHand(hand);
 
-        if (item.getItem() == AllItems.WRENCH.asItem()) {
+        if (item.getItem() == AllItems.WRENCH.asItem() && (state.getValue(BLOCK_TYPE) == TOP || state.getValue(BLOCK_TYPE) == TOP_BOTTOM)) {
             Direction.Axis axis = state.getValue(HORIZONTAL_AXIS);
             switch (axis) {
                 case X -> level.setBlock(pos, state.setValue(HORIZONTAL_AXIS, Direction.Axis.Z), 3);
@@ -122,5 +142,17 @@ public class MetalSupportBlock extends Block {
         } else {
             return InteractionResult.PASS;
         }
+    }
+
+    @Override
+    public @NotNull FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState blockState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+
+        return super.updateShape(state, direction, blockState, level, pos, neighborPos);
     }
 }

@@ -1,31 +1,59 @@
 {
   "variants": {
-    "axis=x,block_type=bottom": {
+    "axis=x,block_type=bottom,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/bottom_pole",
       "y": 90
     },
-    "axis=x,block_type=middle": {
+    "axis=x,block_type=bottom,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/bottom_pole",
+      "y": 90
+    },
+    "axis=x,block_type=middle,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/middle_pole",
       "y": 90
     },
-    "axis=x,block_type=top": {
+    "axis=x,block_type=middle,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/middle_pole",
+      "y": 90
+    },
+    "axis=x,block_type=top,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/top_pole",
       "y": 90
     },
-    "axis=x,block_type=top_bottom": {
+    "axis=x,block_type=top,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/top_pole",
+      "y": 90
+    },
+    "axis=x,block_type=top_bottom,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/top_bottom",
       "y": 90
     },
-    "axis=z,block_type=bottom": {
+    "axis=x,block_type=top_bottom,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/top_bottom",
+      "y": 90
+    },
+    "axis=z,block_type=bottom,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/bottom_pole"
     },
-    "axis=z,block_type=middle": {
+    "axis=z,block_type=bottom,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/bottom_pole"
+    },
+    "axis=z,block_type=middle,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/middle_pole"
     },
-    "axis=z,block_type=top": {
+    "axis=z,block_type=middle,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/middle_pole"
+    },
+    "axis=z,block_type=top,waterlogged=false": {
       "model": "design_n_decor:block/metal_support/top_pole"
     },
-    "axis=z,block_type=top_bottom": {
+    "axis=z,block_type=top,waterlogged=true": {
+      "model": "design_n_decor:block/metal_support/top_pole"
+    },
+    "axis=z,block_type=top_bottom,waterlogged=false": {
+      "model": "design_n_decor:block/metal_support/top_bottom"
+    },
+    "axis=z,block_type=top_bottom,waterlogged=true": {
       "model": "design_n_decor:block/metal_support/top_bottom"
     }
   }
