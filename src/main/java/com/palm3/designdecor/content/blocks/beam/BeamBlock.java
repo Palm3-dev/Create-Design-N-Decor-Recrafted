@@ -3,26 +3,36 @@ package com.palm3.designdecor.content.blocks.beam;
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 
-public class BeamBlock extends Block implements IWrenchable {
+public class BeamBlock extends Block implements IWrenchable, SimpleWaterloggedBlock {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     public static final EnumProperty<BeamStates> BEAM = EnumProperty.create("beam", BeamStates.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public BeamBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.defaultBlockState().setValue(AXIS, Direction.Axis.X).setValue(BEAM, BeamStates.BOTH));
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(AXIS, Direction.Axis.X)
+                .setValue(BEAM, BeamStates.BOTH)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
@@ -46,7 +56,7 @@ public class BeamBlock extends Block implements IWrenchable {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AXIS, BEAM);
+        builder.add(AXIS, BEAM, WATERLOGGED);
         super.createBlockStateDefinition(builder);
     }
 
@@ -56,6 +66,11 @@ public class BeamBlock extends Block implements IWrenchable {
         var face = pContext.getClickedFace();
         var direction = face.getAxis().isHorizontal() ? face.getAxis() : pContext.getHorizontalDirection().getAxis();
         if (stateForPlacement != null) stateForPlacement = stateForPlacement.setValue(AXIS, direction);
+
+        FluidState fluidstate = pContext.getLevel().getFluidState(pContext.getClickedPos());
+        boolean isWaterlogged = fluidstate.getType() == Fluids.WATER;
+        stateForPlacement = stateForPlacement.setValue(WATERLOGGED, isWaterlogged);
+
         return stateForPlacement;
     }
 
@@ -74,5 +89,16 @@ public class BeamBlock extends Block implements IWrenchable {
         public @NotNull String getSerializedName() {
             return name().toLowerCase();
         }
+    }
+
+    @Override
+    public @NotNull FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState blockState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        return super.updateShape(state, direction, blockState, level, pos, neighborPos);
     }
 }

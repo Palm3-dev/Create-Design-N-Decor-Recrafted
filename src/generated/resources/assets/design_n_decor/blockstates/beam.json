@@ -1,21 +1,39 @@
 {
   "variants": {
-    "axis=x,beam=both": {
+    "axis=x,beam=both,waterlogged=false": {
       "model": "dndecor:block/beam/block_x"
     },
-    "axis=x,beam=bottom": {
+    "axis=x,beam=both,waterlogged=true": {
+      "model": "dndecor:block/beam/block_x"
+    },
+    "axis=x,beam=bottom,waterlogged=false": {
       "model": "dndecor:block/beam/bottom_x"
     },
-    "axis=x,beam=top": {
+    "axis=x,beam=bottom,waterlogged=true": {
+      "model": "dndecor:block/beam/bottom_x"
+    },
+    "axis=x,beam=top,waterlogged=false": {
       "model": "dndecor:block/beam/top_x"
     },
-    "axis=z,beam=both": {
+    "axis=x,beam=top,waterlogged=true": {
+      "model": "dndecor:block/beam/top_x"
+    },
+    "axis=z,beam=both,waterlogged=false": {
       "model": "dndecor:block/beam/block_z"
     },
-    "axis=z,beam=bottom": {
+    "axis=z,beam=both,waterlogged=true": {
+      "model": "dndecor:block/beam/block_z"
+    },
+    "axis=z,beam=bottom,waterlogged=false": {
       "model": "dndecor:block/beam/bottom_z"
     },
-    "axis=z,beam=top": {
+    "axis=z,beam=bottom,waterlogged=true": {
+      "model": "dndecor:block/beam/bottom_z"
+    },
+    "axis=z,beam=top,waterlogged=false": {
+      "model": "dndecor:block/beam/top_z"
+    },
+    "axis=z,beam=top,waterlogged=true": {
       "model": "dndecor:block/beam/top_z"
     }
   }
