@@ -121,14 +121,19 @@ public class DnDBlocks {
     // Industrial Plating Block
     public static final BlockEntry<Block> INDUSTRIAL_PLATING_BLOCK = DND_REGISTRATE
             .block("industrial_plating_block", Block::new)
-            .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConn(ORIGINAL_MOD_ID, "industrial_plating_block_side"), omniConn(ORIGINAL_MOD_ID, "industrial_plating_block"))))
             .initialProperties(SharedProperties::softMetal)
-            .properties(p -> p.mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
-            .transform(blockBMI(ORIGINAL_MOD_ID, null))
+            .properties(p -> p.mapColor(MapColor.COLOR_GRAY).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops())
+            .onRegister(connectedTextures(() -> new HorizontalCTBehaviour(omniConn(ORIGINAL_MOD_ID, "industrial_plating_block_side"), omniConn(ORIGINAL_MOD_ID, "industrial_plating_block"))))
+            .onRegister(casingConnectivity((block, cc) -> cc.makeCasing(block, omniConn(ORIGINAL_MOD_ID, "industrial_plating_block_side"))))
+            .blockstate((c, p) -> {
+                var model = p.models().cubeColumn(c.getName(), asDDResource("block/industrial_plating_block_side"), asDDResource("block/industrial_plating_block"));
+                p.simpleBlock(c.getEntry(), model);
+            })
             .loot((t, g) -> t.dropSelf(g))
+            .simpleItem()
             .recipe((c, p) -> {
-                    p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 1);
-                    p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_IRON), RecipeCategory.BUILDING_BLOCKS, c, 2);
+                p.stonecutting(DataIngredient.items(AllBlocks.INDUSTRIAL_IRON_BLOCK.get()), RecipeCategory.BUILDING_BLOCKS, c, 1);
+                p.stonecutting(DataIngredient.tag(Tags.Items.INGOTS_IRON), RecipeCategory.BUILDING_BLOCKS, c, 2);
             })
             .tag(BlockTags.NEEDS_IRON_TOOL, BlockTags.MINEABLE_WITH_PICKAXE, AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .register();
@@ -136,6 +141,7 @@ public class DnDBlocks {
     // Large Metal Girder - DPM
     public static final BlockEntry<ConnectedPillarBlock> LARGE_METAL_GIRDER = simpleConnectedPillar("large_metal_girder", false, MapColor.COLOR_GRAY, SoundType.NETHERITE_BLOCK, "large_girder", "large_girder_top")
             .transform(DDDataGenTransformers.blockDDParent_BMI())  // MAYBE, but MAYBE, fix with blockBMI (conn. texture not working)
+            .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
             .blockstate((c, p) -> {
                 p.models().withExistingParent(c.getName(), asDDResource(c.getName()));
                 p.simpleBlock(c.getEntry(), AssetLookup.standardModel(c ,p));
