@@ -13,13 +13,18 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -27,12 +32,14 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
+import java.util.WeakHashMap;
 
-public class FrontlightBlock extends Block {
+public class FrontlightBlock extends Block implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final EnumProperty CAGE_TYPE = EnumProperty.create("additive", Frontlight.class);
     public static final BooleanProperty ROTATED = BooleanProperty.create("rotated");
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public FrontlightBlock(Properties properties) {
         super(properties.lightLevel(state -> state.getValue(LIT) ? 15 : 0));
@@ -40,12 +47,13 @@ public class FrontlightBlock extends Block {
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LIT, false)
                 .setValue(CAGE_TYPE, Frontlight.TOP)
-                .setValue(ROTATED, false));
+                .setValue(ROTATED, false)
+                .setValue(WATERLOGGED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LIT, CAGE_TYPE, ROTATED);
+        builder.add(FACING, LIT, CAGE_TYPE, ROTATED, WATERLOGGED);
     }
 
     //------------------- Shape -------------------
@@ -74,11 +82,15 @@ public class FrontlightBlock extends Block {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        boolean isWaterlogged = fluidstate.getType() == Fluids.WATER;
+
         return defaultBlockState()
                 .setValue(FACING, context.getClickedFace())
                 .setValue(LIT, context.getLevel().hasNeighborSignal(new BlockPos(context.getClickedPos())))
                 .setValue(CAGE_TYPE, Frontlight.NORMAL)
-                .setValue(ROTATED, false);
+                .setValue(ROTATED, false)
+                .setValue(WATERLOGGED, isWaterlogged);
     }
 
     @Override
@@ -96,7 +108,7 @@ public class FrontlightBlock extends Block {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack item = player.getItemInHand(hand);
 
-        if (item.getItem() != AllItems.WRENCH.asItem()) {  // No wrench
+        if (item.getItem() != AllItems.WRENCH.asItem() && item.getItem() != Items.AIR) {  // No wrench - no air
             if (state.getValue(LIT)) {
                 level.setBlock(pos, state.setValue(LIT, false), 3);
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.5f, 1.2f);
@@ -104,8 +116,9 @@ public class FrontlightBlock extends Block {
                 level.setBlock(pos, state.setValue(LIT, true), 3);
                 level.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.5f, 1.4f);
             }
+            return InteractionResult.SUCCESS;
 
-        } else {  // With wrench
+        } else if (item.getItem() == AllItems.WRENCH.asItem() && item.getItem() != Items.AIR) {  // With wrench - no air
             if (!player.isShiftKeyDown()) {
                 if (state.getValue(FACING).getAxis() == Direction.Axis.Y) {
                     if (hit.getDirection() == Direction.DOWN || hit.getDirection() == Direction.UP) {
@@ -146,8 +159,18 @@ public class FrontlightBlock extends Block {
                 }
                 level.playSound(null, pos, AllSoundEvents.WRENCH_ROTATE.getMainEvent(), SoundSource.BLOCKS, 0.5f, 1.5f);
             }
-        }
+            return InteractionResult.SUCCESS;
+        } else return InteractionResult.PASS;
+    }
 
-        return InteractionResult.SUCCESS;
+    @Override
+    public @NotNull FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    }
+
+    @Override
+    public @NotNull BlockState updateShape(BlockState state, Direction direction, BlockState blockState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        return super.updateShape(state, direction, blockState, level, pos, neighborPos);
     }
 }
