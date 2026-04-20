@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "dndecor:block/industrial_plating_block"
+    "end": "dndecor:block/industrial_plating_block",
+    "side": "dndecor:block/industrial_plating_block_side"
   }
 }

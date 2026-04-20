@@ -1,77 +1,202 @@
 {
   "variants": {
-    "bolt_rotation=deg_0,facing=down": {
+    "bolt_rotation=deg_0,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
       "x": 180
     },
-    "bolt_rotation=deg_0,facing=east": {
+    "bolt_rotation=deg_0,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
+      "x": 180
+    },
+    "bolt_rotation=deg_0,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
       "x": 90,
       "y": 90
     },
-    "bolt_rotation=deg_0,facing=north": {
+    "bolt_rotation=deg_0,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_0,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
       "x": 90
     },
-    "bolt_rotation=deg_0,facing=south": {
+    "bolt_rotation=deg_0,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
+      "x": 90
+    },
+    "bolt_rotation=deg_0,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
       "x": 270
     },
-    "bolt_rotation=deg_0,facing=up": {
+    "bolt_rotation=deg_0,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
+      "x": 270
+    },
+    "bolt_rotation=deg_0,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0"
     },
-    "bolt_rotation=deg_0,facing=west": {
+    "bolt_rotation=deg_0,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0"
+    },
+    "bolt_rotation=deg_0,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
       "x": 270,
       "y": 90
     },
-    "bolt_rotation=deg_135,facing=down": {
+    "bolt_rotation=deg_0,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_0",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_135,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
       "x": 180
     },
-    "bolt_rotation=deg_135,facing=east": {
+    "bolt_rotation=deg_135,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
+      "x": 180
+    },
+    "bolt_rotation=deg_135,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
       "x": 90,
       "y": 90
     },
-    "bolt_rotation=deg_135,facing=north": {
+    "bolt_rotation=deg_135,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_135,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
       "x": 90
     },
-    "bolt_rotation=deg_135,facing=south": {
+    "bolt_rotation=deg_135,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
+      "x": 90
+    },
+    "bolt_rotation=deg_135,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
       "x": 270
     },
-    "bolt_rotation=deg_135,facing=up": {
+    "bolt_rotation=deg_135,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
+      "x": 270
+    },
+    "bolt_rotation=deg_135,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135"
     },
-    "bolt_rotation=deg_135,facing=west": {
+    "bolt_rotation=deg_135,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135"
+    },
+    "bolt_rotation=deg_135,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
       "x": 270,
       "y": 90
     },
-    "bolt_rotation=deg_45,facing=down": {
+    "bolt_rotation=deg_135,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_135",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_45,facing=down,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
       "x": 180
     },
-    "bolt_rotation=deg_45,facing=east": {
+    "bolt_rotation=deg_45,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 180
+    },
+    "bolt_rotation=deg_45,facing=east,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
       "x": 90,
       "y": 90
     },
-    "bolt_rotation=deg_45,facing=north": {
+    "bolt_rotation=deg_45,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_45,facing=north,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
       "x": 90
     },
-    "bolt_rotation=deg_45,facing=south": {
+    "bolt_rotation=deg_45,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 90
+    },
+    "bolt_rotation=deg_45,facing=south,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
       "x": 270
     },
-    "bolt_rotation=deg_45,facing=up": {
+    "bolt_rotation=deg_45,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 270
+    },
+    "bolt_rotation=deg_45,facing=up,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45"
     },
-    "bolt_rotation=deg_45,facing=west": {
+    "bolt_rotation=deg_45,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45"
+    },
+    "bolt_rotation=deg_45,facing=west,waterlogged=false": {
       "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_45,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_45",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_90,facing=down,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 180
+    },
+    "bolt_rotation=deg_90,facing=down,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 180
+    },
+    "bolt_rotation=deg_90,facing=east,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_90,facing=east,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 90,
+      "y": 90
+    },
+    "bolt_rotation=deg_90,facing=north,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 90
+    },
+    "bolt_rotation=deg_90,facing=north,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 90
+    },
+    "bolt_rotation=deg_90,facing=south,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 270
+    },
+    "bolt_rotation=deg_90,facing=south,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 270
+    },
+    "bolt_rotation=deg_90,facing=up,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90"
+    },
+    "bolt_rotation=deg_90,facing=up,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90"
+    },
+    "bolt_rotation=deg_90,facing=west,waterlogged=false": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
+      "x": 270,
+      "y": 90
+    },
+    "bolt_rotation=deg_90,facing=west,waterlogged=true": {
+      "model": "design_n_decor:block/bolts/zinc_dot_bolt_90",
       "x": 270,
       "y": 90
     }

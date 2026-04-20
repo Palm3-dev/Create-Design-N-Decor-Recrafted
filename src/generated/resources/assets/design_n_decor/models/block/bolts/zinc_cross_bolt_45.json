@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_cross_45",
   "textures": {
-    "0": "dndecor:block/zinc_bolt"
+    "0": "dndecor:block/zinc_bolt",
+    "particle": "dndecor:block/zinc_bolt"
   }
 }

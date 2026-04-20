@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_dash_45",
   "textures": {
-    "0": "dndecor:block/brass_bolt"
+    "0": "dndecor:block/brass_bolt",
+    "particle": "dndecor:block/brass_bolt"
   }
 }

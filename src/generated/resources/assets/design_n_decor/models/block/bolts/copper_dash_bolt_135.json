@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_dash_135",
   "textures": {
-    "0": "dndecor:block/copper_bolt"
+    "0": "dndecor:block/copper_bolt",
+    "particle": "dndecor:block/copper_bolt"
   }
 }

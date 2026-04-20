@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_cross_0",
   "textures": {
-    "0": "dndecor:block/industrial_bolt"
+    "0": "dndecor:block/industrial_bolt",
+    "particle": "dndecor:block/industrial_bolt"
   }
 }

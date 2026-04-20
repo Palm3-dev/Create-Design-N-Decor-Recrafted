@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_flat_45",
   "textures": {
-    "0": "dndecor:block/iron_bolt"
+    "0": "dndecor:block/iron_bolt",
+    "particle": "dndecor:block/iron_bolt"
   }
 }

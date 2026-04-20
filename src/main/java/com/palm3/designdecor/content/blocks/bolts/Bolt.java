@@ -5,6 +5,7 @@ import net.minecraft.util.StringRepresentable;
 public enum Bolt implements StringRepresentable {
     DEG_0("deg_0"),
     DEG_45("deg_45"),
+    DEG_90("deg_90"),
     DEG_135("deg_135");
 
     private final String name;

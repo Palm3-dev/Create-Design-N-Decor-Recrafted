@@ -1,6 +1,7 @@
 {
   "parent": "design_n_decor:block/bolts/bolt_base_cross_135",
   "textures": {
-    "0": "dndecor:block/netherite_bolt"
+    "0": "dndecor:block/netherite_bolt",
+    "particle": "dndecor:block/netherite_bolt"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "design_n_decor:block/bolts/bolt_base_cross_90",
+  "textures": {
+    "0": "dndecor:block/iron_bolt",
+    "particle": "dndecor:block/iron_bolt"
+  }
+}
