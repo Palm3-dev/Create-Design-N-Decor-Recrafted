@@ -204,14 +204,20 @@ public class DnDHelpers {
          * @param type The type of the bolt, can be: cross, dash, dot, flat         *
          * @return BlockBuilder + blockstate, models, item and recipe.
          */
-        protected static <T extends Block, P> NonNullUnaryOperator<BlockBuilder<BoltBlock, P>> boltDD_BMIR(String material, Supplier<Item> craftingItem, BoltTypes type) {
+        protected static <T extends Block, P> NonNullUnaryOperator<BlockBuilder<BoltBlock, P>> boltForDD_BMIR(String material, Supplier<Item> craftingItem, BoltTypes type) {
             return b -> b.blockstate((c, p) -> {
                 var model0 = p.models().withExistingParent("block/bolts/" + c.getName() + "_0", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_0"))
-                        .texture("0", asDDResource("block/" + material + "_bolt"));
+                        .texture("0", asDDResource("block/" + material + "_bolt"))
+                        .texture("particle", asDDResource("block/" + material + "_bolt"));
                 var model45 = p.models().withExistingParent("block/bolts/" + c.getName() + "_45", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_45"))
-                        .texture("0", asDDResource("block/" + material + "_bolt"));
+                        .texture("0", asDDResource("block/" + material + "_bolt"))
+                        .texture("particle", asDDResource("block/" + material + "_bolt"));
+                var model90 = p.models().withExistingParent("block/bolts/" + c.getName() + "_90", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_90"))
+                        .texture("0", asDDResource("block/" + material + "_bolt"))
+                        .texture("particle", asDDResource("block/" + material + "_bolt"));
                 var model135 = p.models().withExistingParent("block/bolts/" + c.getName() + "_135", asResource("block/bolts/bolt_base_" + type.getSerializedName() + "_135"))
-                        .texture("0", asDDResource("block/" + material + "_bolt"));
+                        .texture("0", asDDResource("block/" + material + "_bolt"))
+                        .texture("particle", asDDResource("block/" + material + "_bolt"));
 
                 p.getVariantBuilder(c.getEntry()).forAllStates(state -> {
                     ModelFile model;
@@ -221,6 +227,7 @@ public class DnDHelpers {
                     switch (rot) {
                         case DEG_0 -> model = model0;
                         case DEG_45 -> model = model45;
+                        case DEG_90 -> model = model90;
                         case DEG_135 -> model = model135;
                         default -> throw new IllegalArgumentException("Bolt model rotation (from enum Bolt.class) cannot be: " + rot);
                     }
@@ -261,7 +268,7 @@ public class DnDHelpers {
         public static BlockBuilder<BoltBlock, CreateRegistrate> fullBoltBlockBuilder(String material, BoltTypes type, MapColor mapColor, Supplier<Item> stonecuttingWith) {
             return basicClassBlock(BoltBlock::new, material + "_" + type.getSerializedName() + "_bolt", mapColor, SoundType.NETHERITE_BLOCK)
                     .tag(AllTags.AllBlockTags.WRENCH_PICKUP.tag)
-                    .transform(DDDataGenTransformers.boltDD_BMIR(material, stonecuttingWith, type));
+                    .transform(DDDataGenTransformers.boltForDD_BMIR(material, stonecuttingWith, type));
         }
     }
 
