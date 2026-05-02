@@ -24,10 +24,8 @@ import net.minecraftforge.fml.loading.FMLPaths;
 import org.slf4j.Logger;
 
 import java.io.IOException;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.util.Comparator;
 
 @Mod(DnDMain.MOD_ID)
 public class DnDMain { //todo revise blockbuilders methods
@@ -75,19 +73,46 @@ public class DnDMain { //todo revise blockbuilders methods
     // Create load_assets directory.
     @SubscribeEvent
     public void commonSetup(final FMLCommonSetupEvent event) {
-            event.enqueueWork(() -> {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            LOGGER.info("Deleting temporary jar file in 'minecraft/load_assets/' directory");
+            if (Files.exists(LOAD_ASSETS_DIR)) {
                 try {
-                    Files.createDirectories(LOAD_ASSETS_DIR);
-                    LOGGER.info("Created directory for assets jars: " + LOAD_ASSETS_DIR);//todo add readme
+                    Files.deleteIfExists(LOAD_ASSETS_DIR.resolve(DND_JAR_FILE));
                 } catch (IOException e) {
-                    LOGGER.error("Could not create load_assets directory: " + e.getMessage());
+                    LOGGER.error("Error during file delete. Exception: {}", String.valueOf(e));
                 }
-            });
+            } else {
+                LOGGER.info("Dream n' Desires jar file in '.minecraft/load_assets/' does not exist, nothing to delete.");
+            }
+        }));
     }
 
     // Load Design 'N' Decor assets to resourcepack
     @SubscribeEvent
     public void addPackFinders(AddPackFindersEvent event) {
+
+        // Create load assets dir
+        try {
+            Files.createDirectories(LOAD_ASSETS_DIR);
+            LOGGER.info("Created directory for assets jars: " + LOAD_ASSETS_DIR);
+        } catch (IOException e) {
+            LOGGER.error("Could not create load_assets directory: " + e.getMessage());
+        }
+
+        // Copy jar file from mods folder to load_assets
+        LOGGER.info("Trying to copy DnD jar file from mods folder to 'load_assets' dir...");
+        try {
+            if (!Files.exists(LOAD_ASSETS_DIR.resolve(DND_JAR_FILE))) {
+                Files.copy(FMLPaths.GAMEDIR.get().resolve("mods/" + DND_JAR_FILE), LOAD_ASSETS_DIR.resolve(DND_JAR_FILE), StandardCopyOption.REPLACE_EXISTING);
+                LOGGER.info("Copied Design n' Decor jar file in 'load_assets' directory");
+            } else {
+                LOGGER.info("Design n' Decor jar file already in 'load_assets' folder.");
+            }
+        } catch (IOException e) {
+            LOGGER.error("Jar file copy in 'load_assets' from mods folder failed with an exception: {}", String.valueOf(e));
+        }
+
+        // Pack loading phase
         LOGGER.info("=======================================================================================");
         LOGGER.info("Loading '" + ORIGINAL_MOD_ID + "' mod assets from jar file...");
 
@@ -109,7 +134,7 @@ public class DnDMain { //todo revise blockbuilders methods
 
                     event.addRepositorySource((infoConsumer) -> {
                         Pack pack = Pack.create(
-                                "dd_assets",
+                                "dnd_assets",
                                 Component.literal("Design 'N' Decor Assets"),
                                 true,  // Cannot be disabled?
                                 (id) -> externalPack,
@@ -127,7 +152,7 @@ public class DnDMain { //todo revise blockbuilders methods
                 }
             } else {
                 LOGGER.error("No compatible Design 'N' Decor jar found in" + LOAD_ASSETS_DIR + "directory");
-                LOGGER.info("Download the '" + DND_JAR_FILE + "' mod version and put it in the mods folder");
+                LOGGER.info("Download the '" + DND_JAR_FILE + "' mod version and put it in the 'load_assets'");
             }
         }
     }
