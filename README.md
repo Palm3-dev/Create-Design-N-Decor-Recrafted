@@ -25,7 +25,7 @@ If you are interested in the mod development, see the currently added things on 
 ## Download
 The mod is avaiable for **1.20.1 Forge** on both CurseForge and Modrinth.
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/design-n-decor-recrafted)
-- Modrinth: none for now (needs to be approved).
+- [Modrinth](https://modrinth.com/mod/design-n-decor-recrafted)
 
 You'll also need the original **Design 'N' Decor** in order to install this mod.
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/create-design-n-decor)
@@ -33,18 +33,22 @@ You'll also need the original **Design 'N' Decor** in order to install this mod.
 
 Follow this table to know which version of Design 'N' Decor (DnD) you need to install.
   
-  | Mod Version |      DnD Version      |
-  |-------------|:-------------:|
-  | 1.0.0       |  1.21.1 - 2.1.0 |
-  | 1.0.1       | 1.21.1 - 2.1.0  |
-  | 1.0.2       | 1.21.1 - 2.1.0  |
+  | Mod Version (This) |      DnD Version      |
+  |--------------------|:-------------:|
+  | 1.0.0              |  1.21.1 - 2.1.0 |
+  | 1.0.1              | 1.21.1 - 2.1.0  |
+  | 1.0.2              | 1.21.1 - 2.1.0  |
   
 <sub>Only major mod versions are shown here, **unless specified,** for hotfixes or other not shown versions you can download the **same DnD version** required by the major mod version.</sub>
 <sub>For example, for 1.0.1-hotfix1, still download Design 'N' Decor 1.21.1-2.1.0</sub>
 
 
 ## Installation
-1. Download this mod and the associated Design 'N' Decor version (see the table below). 
+To be revised and will change in future release (i hope soon)!
+
+Could also vary depending on the mod version!
+
+1. Download this mod and the associated Design 'N' Decor version (see the table above). 
 2. Install this mod ONLY (in the normal ```mods``` folder) and load the game once. Now, in the main game folder ```.minecraft```, a new folder ```load_assets``` has been created. This is the new location where to put the Design 'N' Decor jar. 
 3. As said, put the design n decor jar in that folder and load the game, that should work just fine.
 
