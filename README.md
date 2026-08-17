@@ -1,3 +1,5 @@
+## Project currently in idle!
+
 # Create Design 'N' Decor: Recrafted - by Palm3
 ![Alt](/images/icon.png "icon)")
 
@@ -58,6 +60,6 @@ Q. Why are my textures and models broken?
 A. Most probably you don't have the original Design 'N' Decor file in the mods folder, or it's the wrong one.
 
 
-Q. Do i need to also install Design 'N' Decor?
+Q. Do i need to also install the original Design 'N' Decor?
 
-A. Yes you need it, even if it's on NeoForge 1.21.1. This **won't** crash your game.
+A. Yes you need it, even if it's for NeoForge 1.21.1. This **won't** crash your game.
